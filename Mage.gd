@@ -12,7 +12,10 @@ func _process(delta):
 		anim_dir = "up"
 	if self.dir.x != 0:
 		anim_dir = "side"
+
+	$Sprite.flip_h = (anim_dir == "side" and self.dir.x > 0)
 	$AnimationPlayer.play(anim_name + "_" + anim_dir)
+	$Debug.set_text(anim_name + "_" + anim_dir)
 
 func _physics_process(delta):
 	var x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
