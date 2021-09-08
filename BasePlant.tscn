@@ -28,6 +28,7 @@ scale_curve = SubResource( 2 )
 script = ExtResource( 1 )
 
 [node name="ProductionTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="GrowthTimer" type="Timer" parent="."]
 wait_time = 5.0
@@ -49,4 +50,5 @@ one_shot = true
 explosiveness = 0.5
 randomness = 0.5
 process_material = SubResource( 3 )
+[connection signal="timeout" from="ProductionTimer" to="." method="_on_ProductionTimer_timeout"]
 [connection signal="timeout" from="GrowthTimer" to="." method="_on_GrowthTimer_timeout"]
