@@ -1,12 +1,18 @@
 extends KinematicBody2D
 
 
+class_name Character
+
+
 var speed = 300
 var is_walking = false
 var dir = Vector2.ZERO
 
-const FirePepper = preload("res://PlantTypes/FirePepper.tscn")
+var near_plants = {}
 
+
+export var world_path: NodePath
+onready var world = get_node(world_path)
 
 func _process(delta):
 	var anim_name = "walking" if self.is_walking else "idle"
@@ -18,16 +24,12 @@ func _process(delta):
 
 	$Sprite.flip_h = (anim_dir == "side" and self.dir.x > 0)
 	$AnimationPlayer.play(anim_name + "_" + anim_dir)
-	$Debug.set_text(anim_name + "_" + anim_dir)
+	$Debug.set_text("can plant " + str(not len(near_plants)))
 
 func _unhandled_input(event):
 	if event.is_action_released("ui_select"):
-		self.plant()
-
-func plant():
-	var fire_pepper = FirePepper.instance()
-	fire_pepper.global_position = self.global_position
-	get_parent().add_child(fire_pepper)
+		if len(self.near_plants) == 0:
+			self.world.spawn_plant(self)
 
 func _physics_process(delta):
 	var x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))

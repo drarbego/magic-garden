@@ -1,6 +1,9 @@
 extends Node2D
 
 
+class_name BasePlant
+
+
 export var sprite_row = 0 # row index for flowers.png
 export var production_wait_time = 5.0
 export var growth_wait_scalar = 1.0 # at each stage, growth wait time will increase by growth_wait_scalar
@@ -16,6 +19,14 @@ func _ready():
 	$GrowthTimer.set_wait_time(self.growth_wait_time)
 	$GrowthTimer.start()
 	self.update_graphics()
+
+func _on_CharacterDetector_body_entered(body):
+	if body is Character:
+		body.near_plants[self.get_instance_id()] = self
+
+func _on_CharacterDetector_body_exited(body):
+	if body is Character:
+		body.near_plants.erase(self.get_instance_id())
 
 func _on_GrowthTimer_timeout():
 	self.growth_wait_time *= self.growth_wait_scalar

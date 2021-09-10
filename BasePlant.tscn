@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://BasePlant.gd" type="Script" id=1]
 [ext_resource path="res://Assets/flowers.png" type="Texture" id=2]
@@ -24,8 +24,15 @@ radial_accel = 100.0
 tangential_accel = 100.0
 scale_curve = SubResource( 2 )
 
+[sub_resource type="CircleShape2D" id=4]
+radius = 20.0
+
 [node name="BasePlant" type="Node2D"]
 script = ExtResource( 1 )
+sprite_row = null
+production_wait_time = null
+growth_wait_scalar = null
+growth_wait_time = null
 
 [node name="ProductionTimer" type="Timer" parent="."]
 one_shot = true
@@ -35,6 +42,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 3
@@ -50,5 +58,12 @@ one_shot = true
 explosiveness = 0.5
 randomness = 0.5
 process_material = SubResource( 3 )
+
+[node name="CharacterDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterDetector"]
+shape = SubResource( 4 )
 [connection signal="timeout" from="ProductionTimer" to="." method="_on_ProductionTimer_timeout"]
 [connection signal="timeout" from="GrowthTimer" to="." method="_on_GrowthTimer_timeout"]
+[connection signal="body_entered" from="CharacterDetector" to="." method="_on_CharacterDetector_body_entered"]
+[connection signal="body_exited" from="CharacterDetector" to="." method="_on_CharacterDetector_body_exited"]

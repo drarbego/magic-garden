@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://BasePlant.tscn" type="PackedScene" id=1]
+[ext_resource path="res://PlantTypes/FirePepper.gd" type="Script" id=2]
 
 [node name="FirePepper" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
 sprite_row = 3
-growth_wait_scalar = 1.2
+production_wait_time = 5.0
+growth_wait_scalar = 1.0
+growth_wait_time = 5.0
