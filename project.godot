@@ -9,19 +9,19 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
-"class": "BasePlant",
-"language": "GDScript",
-"path": "res://BasePlant.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
 "path": "res://Engine/Character.gd"
+}, {
+"base": "Node2D",
+"class": "Plant",
+"language": "GDScript",
+"path": "res://BasePlant.gd"
 } ]
 _global_script_class_icons={
-"BasePlant": "",
-"Character": ""
+"Character": "",
+"Plant": ""
 }
 
 [application]

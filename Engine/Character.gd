@@ -7,6 +7,7 @@ class_name Character
 var speed = 300
 var is_walking = false
 var dir = Vector2.ZERO
+var do_interaction = FuncRef.new()
 
 var near_plants = {}
 
@@ -28,7 +29,9 @@ func _process(delta):
 
 func _unhandled_input(event):
 	if event.is_action_released("ui_select"):
-		if len(self.near_plants) == 0:
+		if self.do_interaction.is_valid():
+			self.do_interaction.call_func(self)
+		elif self.near_plants.empty(): # being lazy
 			self.world.spawn_plant(self)
 
 func _physics_process(delta):

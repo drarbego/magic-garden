@@ -6,6 +6,3 @@
 [node name="FirePepper" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 sprite_row = 3
-production_wait_time = 5.0
-growth_wait_scalar = 1.0
-growth_wait_time = 5.0

@@ -1,1 +1,1 @@
-extends BasePlant
+extends Plant

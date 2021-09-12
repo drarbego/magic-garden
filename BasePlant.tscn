@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://BasePlant.gd" type="Script" id=1]
 [ext_resource path="res://Assets/flowers.png" type="Texture" id=2]
 [ext_resource path="res://Assets/pop_effect.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/water_drop.png" type="Texture" id=4]
 
 [sub_resource type="Curve" id=1]
 max_value = 6.0
@@ -25,19 +26,58 @@ tangential_accel = 100.0
 scale_curve = SubResource( 2 )
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 20.0
+radius = 23.7942
+
+[sub_resource type="Animation" id=5]
+resource_name = "water"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("WaterDrop:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WaterDrop:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ), Vector2( 0.6, 0.6 ), Vector2( 0.7, 0.7 ), Vector2( 0.8, 0.8 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WaterDrop:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 12, -20 ), Vector2( 12, -18 ), Vector2( 12, -16 ), Vector2( 12, -14 ), Vector2( 12, -12 ), Vector2( 12, -10 ), Vector2( 12, -8 ), Vector2( 12, -6 ), Vector2( 12, -5 ), Vector2( 12, -4 ), Vector2( 12, -3 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 14.8279
 
 [node name="BasePlant" type="Node2D"]
 script = ExtResource( 1 )
-sprite_row = null
-production_wait_time = null
-growth_wait_scalar = null
-growth_wait_time = null
 
 [node name="ProductionTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="GrowthTimer" type="Timer" parent="."]
+[node name="WaterTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
 
@@ -46,6 +86,11 @@ position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
 vframes = 5
 hframes = 3
+
+[node name="WaterDrop" type="Sprite" parent="."]
+position = Vector2( 12, -20 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 4 )
 
 [node name="PopEffect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
@@ -63,7 +108,17 @@ process_material = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterDetector"]
 shape = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/water = SubResource( 5 )
+
+[node name="InteractionDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionDetector"]
+shape = SubResource( 6 )
 [connection signal="timeout" from="ProductionTimer" to="." method="_on_ProductionTimer_timeout"]
-[connection signal="timeout" from="GrowthTimer" to="." method="_on_GrowthTimer_timeout"]
+[connection signal="timeout" from="WaterTimer" to="." method="_on_WaterTimer_timeout"]
 [connection signal="body_entered" from="CharacterDetector" to="." method="_on_CharacterDetector_body_entered"]
 [connection signal="body_exited" from="CharacterDetector" to="." method="_on_CharacterDetector_body_exited"]
+[connection signal="body_entered" from="InteractionDetector" to="." method="_on_InteractionDetector_body_entered"]
+[connection signal="body_exited" from="InteractionDetector" to="." method="_on_InteractionDetector_body_exited"]
