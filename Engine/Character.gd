@@ -6,8 +6,11 @@ class_name Character
 
 var speed = 300
 var is_walking = false
+var has_water = false
 var dir = Vector2.ZERO
 var do_interaction = FuncRef.new()
+
+var fire_balls = 0
 
 var near_plants = {}
 
@@ -25,7 +28,7 @@ func _process(delta):
 
 	$Sprite.flip_h = (anim_dir == "side" and self.dir.x > 0)
 	$AnimationPlayer.play(anim_name + "_" + anim_dir)
-	$Debug.set_text("can plant " + str(not len(near_plants)))
+	$Debug.set_text("has water " + str(has_water))
 
 func _unhandled_input(event):
 	if event.is_action_released("ui_select"):

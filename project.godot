@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Plant",
 "language": "GDScript",
-"path": "res://BasePlant.gd"
+"path": "res://Engine/Plant/Plant.gd"
 } ]
 _global_script_class_icons={
 "Character": "",
