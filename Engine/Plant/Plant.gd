@@ -52,11 +52,10 @@ func _on_ProductionTimer_timeout():
 	if self.current_state.has_method("on_ProductionTimer_timeout"):
 		self.current_state.on_ProductionTimer_timeout(self)
 
-func receive_water(player):
+func receive_water():
 	# todo check player has water
 
 	self.water_content = self.max_water_content
-	player.has_water = false
 
 func give_product(player):
 	self.produced = false

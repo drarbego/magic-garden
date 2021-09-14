@@ -4,6 +4,10 @@ extends KinematicBody2D
 class_name Character
 
 
+# TESTING
+var WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
+
+
 var speed = 300
 var is_walking = false
 var has_water = false
@@ -36,6 +40,12 @@ func _unhandled_input(event):
 			self.do_interaction.call_func(self)
 		elif self.near_plants.empty(): # being lazy
 			self.world.spawn_plant(self)
+	if event.is_action_pressed("shoot"):
+		var water_drop = WaterDrop.instance().init(
+			get_global_mouse_position(),
+			(get_global_mouse_position() - self.global_position).normalized()
+		)
+		get_parent().add_child(water_drop)
 
 func _physics_process(delta):
 	var x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))

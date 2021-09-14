@@ -7,10 +7,10 @@ func ready(plant):
 
 func on_InteractionDetector_body_entered(body, plant):
 	if body is Character:
-		if body.has_water:
-			body.do_interaction = funcref(plant, "receive_water")
 		if plant.produced:
-			body.do_interaction = funcref(plant, "give_product")
+			plant.give_product(body)
+	elif body is WaterDrop:
+		plant.receive_water()
 
 func on_InteractionDetector_body_exited(body, _plant):
 	if body is Character:
