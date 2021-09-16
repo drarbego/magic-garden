@@ -1,13 +1,13 @@
-extends KinematicBody2D
-
-
-class_name WaterDrop
+extends Projectile
 
 
 var player: Object = null
 var direction = Vector2.ZERO
 var speed = 150.0
-const MAX_DIST_FROM_PLAYER = 80.0
+var initial_pos := Vector2.ZERO
+const MAX_DIST_INITAL_POS = 80.0
+const MAX_EXTRA_RAND_ROTATION = 30.0
+const MAX_EXTRA_RAND_SPEED = 100.0
 
 func init(_player: Object, pos: Vector2, dir: Vector2):
 	self.player = _player
@@ -18,14 +18,18 @@ func init(_player: Object, pos: Vector2, dir: Vector2):
 
 func _ready():
 	randomize()
-	var rand_extra_rotation = (randf() * 40) - 20
+	var rand_extra_rotation = (randf() * 2 * MAX_EXTRA_RAND_ROTATION) - MAX_EXTRA_RAND_ROTATION
 	self.direction = direction.rotated(deg2rad(rand_extra_rotation))
-	var rand_extra_speed = self.speed + randf() * 100.0
+	var rand_extra_speed = self.speed + randf() * MAX_EXTRA_RAND_SPEED
 	self.speed = rand_extra_speed
+	self.initial_pos = self.global_position
 
 func _physics_process(_delta):
-	var dist_to_player = (self.global_position - self.player.global_position).length()
-	if dist_to_player > MAX_DIST_FROM_PLAYER and not self.is_queued_for_deletion():
+	var dist_to_initial_pos = (self.global_position - self.initial_pos).length()
+	if dist_to_initial_pos > MAX_DIST_INITAL_POS and not self.is_queued_for_deletion():
 		self.queue_free()
 
 	move_and_slide(self.direction * self.speed)
+
+func on_impact(plant: Plant):
+	plant.receive_water()

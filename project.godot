@@ -25,15 +25,15 @@ _global_script_classes=[ {
 "path": "res://Engine/Plant/Plant.gd"
 }, {
 "base": "KinematicBody2D",
-"class": "WaterDrop",
+"class": "Projectile",
 "language": "GDScript",
-"path": "res://ProjectileTypes/WaterDrop.gd"
+"path": "res://Engine/Projectile.gd"
 } ]
 _global_script_class_icons={
 "Action": "",
 "Character": "",
 "Plant": "",
-"WaterDrop": ""
+"Projectile": ""
 }
 
 [application]

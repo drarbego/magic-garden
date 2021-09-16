@@ -5,13 +5,12 @@ func ready(plant):
 	plant.get_node("GrowthTimer").set_wait_time(plant.growth_wait_time)
 	plant.get_node("GrowthTimer").start()
 
-func on_InteractionDetector_body_entered(body, plant):
-	if body is Character and body.has_water:
-		body.do_interaction = funcref(plant, "receive_water")
+func on_HitBox_body_entered(body, plant):
+	if body is Projectile and body.has_method("on_impact"):
+		body.on_impact(plant)
 
-func on_InteractionDetector_body_exited(body, _plant):
-	if body is Character:
-		body.do_interaction = FuncRef.new()
+func on_HitBox_body_exited(_body, _plant):
+	pass
 
 func on_CharacterDetector_body_entered(body, plant):
 	if body is Character:

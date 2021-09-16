@@ -5,16 +5,12 @@ func ready(plant):
 	plant.get_node("ProductionTimer").set_wait_time(plant.production_wait_time)
 	plant.get_node("ProductionTimer").start()
 
-func on_InteractionDetector_body_entered(body, plant):
-	if body is Character:
-		if plant.produced:
-			plant.give_product(body)
-	elif body is WaterDrop:
-		plant.receive_water()
+func on_HitBox_body_entered(body, plant):
+	if body is Projectile and body.has_method("on_impact"):
+		body.on_impact(plant)
 
-func on_InteractionDetector_body_exited(body, _plant):
-	if body is Character:
-		body.do_interaction = FuncRef.new()
+func on_HitBox_body_exited(_body, _plant):
+	pass
 
 func on_CharacterDetector_body_entered(body, plant):
 	if body is Character:

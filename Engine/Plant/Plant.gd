@@ -9,7 +9,7 @@ export var production_wait_time := 5.0
 export var growth_wait_time := 5.0
 export var growth_wait_scalar := 1.0 # at each stage, growth wait time will increase by water_wait_scalar
 export var max_water_content := 10.0
-var water_content = max_water_content
+onready var water_content = max_water_content
 export var water_loss_per_sec = 1.0
 const GROWTH_STAGES_COUNT = 3
 
@@ -28,13 +28,15 @@ func _ready():
 	self.update_graphics()
 	self.change_state($States/Growing)
 
-func _on_InteractionDetector_body_entered(body):
-	if self.current_state.has_method("on_InteractionDetector_body_entered"):
-		self.current_state.on_InteractionDetector_body_entered(body, self)
 
-func _on_InteractionDetector_body_exited(body):
-	if self.current_state.has_method("on_InteractionDetector_body_exited"):
-		self.current_state.on_InteractionDetector_body_exited(body, self)
+
+func _on_HitBox_body_entered(body):
+	if self.current_state.has_method("on_HitBox_body_entered"):
+		self.current_state.on_HitBox_body_entered(body, self)
+
+func _on_HitBox_body_exited(body):
+	if self.current_state.has_method("on_HitBox_body_exited"):
+		self.current_state.on_HitBox_body_exited(body, self)
 
 func _on_CharacterDetector_body_entered(body):
 	if self.current_state.has_method("on_CharacterDetector_body_entered"):
@@ -53,8 +55,6 @@ func _on_ProductionTimer_timeout():
 		self.current_state.on_ProductionTimer_timeout(self)
 
 func receive_water():
-	# todo check player has water
-
 	self.water_content = self.max_water_content
 
 func give_product(player):
