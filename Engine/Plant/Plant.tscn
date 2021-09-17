@@ -97,7 +97,7 @@ color = Color( 0.482353, 0.784314, 0.658824, 1 )
 
 [node name="BasePlant" type="Node2D"]
 script = ExtResource( 4 )
-max_water_content = 120.0
+max_water_content = 60.0
 
 [node name="ProductionTimer" type="Timer" parent="."]
 one_shot = true

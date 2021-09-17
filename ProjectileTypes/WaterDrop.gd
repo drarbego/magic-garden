@@ -1,18 +1,19 @@
 extends Projectile
 
 
+const MAX_DIST_INITAL_POS = 50.0
+const MAX_EXTRA_RAND_ROTATION = 15.0
+const MAX_EXTRA_RAND_SPEED = 20.0
+
 var player: Object = null
 var direction = Vector2.ZERO
-var speed = 150.0
+var speed = 50.0
 var initial_pos := Vector2.ZERO
-const MAX_DIST_INITAL_POS = 80.0
-const MAX_EXTRA_RAND_ROTATION = 30.0
-const MAX_EXTRA_RAND_SPEED = 100.0
 
 func init(_player: Object, pos: Vector2, dir: Vector2):
 	self.player = _player
-	self.direction = dir
 	self.global_position = pos
+	self.direction = dir
 
 	return self
 

@@ -18,10 +18,14 @@ var near_plants = {}
 export var world_path: NodePath
 onready var world = get_node(world_path)
 
-const TestAction = preload("res://ActionTypes/WateringAction.tscn")
+const WateringAction = preload("res://ActionTypes/WateringAction.tscn")
+const FireSpellAction = preload("res://ActionTypes/FireSpellAction.tscn")
+
+var action_cursor = 0
+var actions = [WateringAction, FireSpellAction]
 
 func _ready():
-	var action = TestAction.instance().init(self, self.world, 20.0)
+	var action = WateringAction.instance().init(self, self.world, 20.0)
 	$Action.add_child(action)
 
 func _process(delta):
@@ -42,6 +46,12 @@ func _unhandled_input(event):
 			self.do_interaction.call_func(self)
 		elif self.near_plants.empty(): # being lazy
 			self.world.spawn_plant(self)
+	if event.is_action_pressed("change_action"):
+		self.action_cursor = (self.action_cursor + 1) % len(self.actions)
+		var action = self.actions[self.action_cursor].instance().init(self, self.world, 20.0)
+		for child in $Action.get_children():
+			child.queue_free()
+		$Action.add_child(action)
 
 func _physics_process(delta):
 	var x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))

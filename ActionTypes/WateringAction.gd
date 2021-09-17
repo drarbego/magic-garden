@@ -3,8 +3,8 @@ extends Action
 var WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
 
 var is_shooting = false
-const COOLDOWN_TIME = 0.1
-var cooldown = COOLDOWN_TIME
+const COOLDOWN_TIME := 0.1
+var cooldown := COOLDOWN_TIME
 
 func _physics_process(delta):
 	self.cooldown -= delta
