@@ -1,11 +1,31 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Engine/Action.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/water_drop.png" type="Texture" id=2]
 [ext_resource path="res://ActionTypes/WateringAction.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.294118, 0.572549, 0.772549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="WateringAction" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="Icon" parent="." index="0"]
 texture = ExtResource( 2 )
+
+[node name="ContentBar" type="ProgressBar" parent="Icon" index="0"]
+visible = false
+margin_left = -23.3861
+margin_top = 8.66817
+margin_right = 26.6139
+margin_bottom = 22.6682
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

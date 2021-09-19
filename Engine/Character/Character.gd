@@ -9,7 +9,6 @@ var dir = Vector2.ZERO
 var do_interaction = FuncRef.new()
 
 # replace with water amount
-var water_content:float = 0.0
 
 var fire_balls = 0
 
@@ -47,7 +46,6 @@ func _process(delta):
 
 	$Sprite.flip_h = (anim_dir == "side" and self.dir.x > 0)
 	$AnimationPlayer.play(anim_name + "_" + anim_dir)
-	$Debug.set_text("water content " + str(water_content))
 
 func _unhandled_input(event):
 	if event.is_action_released("ui_select"):
@@ -73,6 +71,8 @@ func _physics_process(delta):
 func increase_action_projectiles(projectile_type, amount):
 	if str(projectile_type) == str(self.FireSpellAction.instance().FireBall):
 		self.actions_state[str(self.FireSpellAction)]["amount"] += amount
+	if str(projectile_type) == str(self.WateringAction.instance().WaterDrop):
+		self.actions_state[str(self.WateringAction)]["amount"] = amount
 	print(self.actions_state)
 
 func get_current_action_state():

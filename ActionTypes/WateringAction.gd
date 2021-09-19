@@ -9,13 +9,19 @@ var cooldown := COOLDOWN_TIME
 func _physics_process(delta):
 	self.cooldown -= delta
 
-	if self.is_shooting and self.player.water_content > 0.0:
-		self.player.water_content -= delta
+	if self.is_shooting and self.player.has_enough_projectiles():
+		self.player.decrease_projectiles(delta)
 
 	if self.cooldown <= 0.0:
 		self.cooldown = COOLDOWN_TIME
-		if self.is_shooting and self.player.water_content > 0.0:
+		if self.is_shooting and self.player.has_enough_projectiles():
 			self.spawn_projectile()
+
+func _process(delta):
+	$Icon/ContentBar.set_visible(self.is_shooting)
+	var action_state = self.player.get_current_action_state()
+	$Icon/ContentBar.set_value(100 * (action_state["amount"] / 5))
+
 
 func spawn_projectile():
 	var water_drop = WaterDrop.instance().init(
