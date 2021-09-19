@@ -1,9 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Engine/Projectile.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ProjectileTypes/WaterDrop.gd" type="Script" id=3]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.168627, 0.454902, 0.756863, 1, 0.545098, 0.713726, 0.894118, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -15,7 +21,7 @@ linear_accel = 10.0
 tangential_accel = 40.0
 damping = 20.0
 scale = 3.0
-color = Color( 0.270588, 0.72549, 0.968627, 1 )
+color_ramp = SubResource( 2 )
 
 [node name="WaterDrop" instance=ExtResource( 1 )]
 collision_mask = 0
@@ -24,4 +30,4 @@ script = ExtResource( 3 )
 [node name="Particles2D" type="Particles2D" parent="." index="1"]
 amount = 20
 lifetime = 0.5
-process_material = SubResource( 1 )
+process_material = SubResource( 3 )

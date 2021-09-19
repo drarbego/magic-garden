@@ -17,18 +17,23 @@ const GROWTH_STAGES_COUNT = 3
 var stage = 0 # column index for flowers.png
 var needs_water = false
 var produced = false
+var is_character_near = false
 onready var current_state = $States/Growing
+var world: Object = null
 
 func change_state(new_state):
 	self.current_state = new_state
 	if self.current_state.has_method("ready"):
 		self.current_state.ready(self)
 
+func init(_world: Object):
+	self.world = _world
+
+	return self
+
 func _ready():
 	self.update_graphics()
 	self.change_state($States/Growing)
-
-
 
 func _on_HitBox_body_entered(body):
 	if self.current_state.has_method("on_HitBox_body_entered"):
@@ -41,10 +46,12 @@ func _on_HitBox_body_exited(body):
 func _on_CharacterDetector_body_entered(body):
 	if self.current_state.has_method("on_CharacterDetector_body_entered"):
 		self.current_state.on_CharacterDetector_body_entered(body, self)
+		self.is_character_near = true
 
 func _on_CharacterDetector_body_exited(body):
 	if self.current_state.has_method("on_CharacterDetector_body_exited"):
 		self.current_state.on_CharacterDetector_body_exited(body, self)
+		self.is_character_near = false
 
 func _on_GrowthTimer_timeout():
 	if self.current_state.has_method("on_GrowthTimer_timeout"):
@@ -57,7 +64,8 @@ func _on_ProductionTimer_timeout():
 func receive_water():
 	self.water_content = self.max_water_content
 
-func give_product(player):
+func give_product():
+	var player = self.world.get_node("Character")
 	self.produced = false
 	player.fire_balls = 10
 	$ProductionTimer.start()
@@ -72,7 +80,6 @@ func _process(delta):
 		self.max_water_content
 	)
 	self.needs_water = (self.water_content / self.max_water_content) < 0.5
-	$Debug.set_text(str(self.needs_water))
 
 	if self.current_state.has_method("process"):
 		self.current_state.process(delta, self)

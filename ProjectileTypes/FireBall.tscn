@@ -34,7 +34,7 @@ color_ramp = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="." index="1"]
-amount = 50
+amount = 100
 lifetime = 0.6
 local_coords = false
 process_material = SubResource( 5 )

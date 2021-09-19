@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const MAX_DIST_INITAL_POS = 200.0
+const MAX_DIST_INITAL_POS = 1000.0
 
 var direction := Vector2.ZERO
 var speed := 450.0

@@ -97,7 +97,6 @@ color = Color( 0.482353, 0.784314, 0.658824, 1 )
 
 [node name="BasePlant" type="Node2D"]
 script = ExtResource( 4 )
-max_water_content = 60.0
 
 [node name="ProductionTimer" type="Timer" parent="."]
 one_shot = true
@@ -157,15 +156,6 @@ emitting = false
 amount = 15
 lifetime = 0.5
 process_material = SubResource( 9 )
-
-[node name="Debug" type="Label" parent="."]
-margin_left = 8.9797
-margin_top = -26.9391
-margin_right = 48.9797
-margin_bottom = -12.9391
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="timeout" from="ProductionTimer" to="." method="_on_ProductionTimer_timeout"]
 [connection signal="timeout" from="GrowthTimer" to="." method="_on_GrowthTimer_timeout"]
 [connection signal="body_entered" from="CharacterDetector" to="." method="_on_CharacterDetector_body_entered"]
