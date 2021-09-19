@@ -6,8 +6,8 @@ func ready(plant):
 	plant.get_node("ProductionTimer").start()
 
 func on_HitBox_body_entered(body, plant):
-	if body is Projectile and body.has_method("on_impact"):
-		body.on_impact(plant)
+	if body is Projectile:
+		plant.handle_impact(body)
 
 func on_HitBox_body_exited(_body, _plant):
 	pass

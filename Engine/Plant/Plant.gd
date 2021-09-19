@@ -88,3 +88,9 @@ func update_water_animation():
 	else:
 		$AnimationPlayer.stop()
 		$WaterDrop.visible = false
+
+func handle_impact(projectile):
+	if projectile is WaterDrop:
+		self.receive_water()
+	if projectile is FireBall:
+		self.queue_free()

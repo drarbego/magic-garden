@@ -1,4 +1,8 @@
-extends KinematicBody2D
+extends Projectile
+
+
+class_name FireBall
+
 
 const MAX_DIST_INITAL_POS = 1000.0
 

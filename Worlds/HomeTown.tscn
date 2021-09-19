@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Worlds/HomeTown.gd" type="Script" id=1]
 [ext_resource path="res://Engine/Character/Character.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/world-tiles.png" type="Texture" id=3]
 [ext_resource path="res://WaterDispenser.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Engine/Enemy/Enemy.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "world-tiles.png 0"
@@ -275,3 +276,6 @@ position = Vector2( 396.903, 91.6577 )
 
 [node name="Character" parent="." instance=ExtResource( 2 )]
 world_path = NodePath("..")
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 213.268, 162.757 )

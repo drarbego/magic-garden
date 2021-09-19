@@ -29,7 +29,7 @@ var actions_state = {
 		"amount": 0
 	},
 	str(FireSpellAction): {
-		"amount": 0
+		"amount": 5
 	}
 }
 

@@ -1,6 +1,9 @@
 extends Projectile
 
 
+class_name WaterDrop
+
+
 const MAX_DIST_INITAL_POS = 50.0
 const MAX_EXTRA_RAND_ROTATION = 15.0
 const MAX_EXTRA_RAND_SPEED = 20.0
@@ -31,6 +34,3 @@ func _physics_process(_delta):
 		self.queue_free()
 
 	move_and_slide(self.direction * self.speed)
-
-func on_impact(plant: Plant):
-	plant.receive_water()

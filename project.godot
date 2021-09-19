@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Engine/Character/Character.gd"
 }, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Engine/Enemy/Enemy.gd"
+}, {
+"base": "Projectile",
+"class": "FireBall",
+"language": "GDScript",
+"path": "res://ProjectileTypes/FireBall.gd"
+}, {
 "base": "Node2D",
 "class": "Plant",
 "language": "GDScript",
@@ -28,12 +38,20 @@ _global_script_classes=[ {
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://Engine/Projectile.gd"
+}, {
+"base": "Projectile",
+"class": "WaterDrop",
+"language": "GDScript",
+"path": "res://ProjectileTypes/WaterDrop.gd"
 } ]
 _global_script_class_icons={
 "Action": "",
 "Character": "",
+"Enemy": "",
+"FireBall": "",
 "Plant": "",
-"Projectile": ""
+"Projectile": "",
+"WaterDrop": ""
 }
 
 [application]
