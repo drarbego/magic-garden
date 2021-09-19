@@ -33,11 +33,3 @@ func on_GrowthTimer_timeout(plant):
 	else:
 		plant.get_node("GrowthTimer").set_wait_time(plant.growth_wait_time)
 		plant.get_node("GrowthTimer").start()
-
-func process(_delta, plant):
-	if plant.needs_water:
-		plant.get_node("AnimationPlayer").play("water")
-	else:
-		plant.get_node("AnimationPlayer").stop()
-		plant.get_node("WaterDrop").visible = false
-	

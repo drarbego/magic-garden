@@ -74,6 +74,17 @@ func _process(delta):
 		self.max_water_content
 	)
 	self.needs_water = (self.water_content / self.max_water_content) < 0.5
+	if self.water_content <= 0:
+		self.queue_free()
+	self.update_water_animation()
 
 	if self.current_state.has_method("process"):
 		self.current_state.process(delta, self)
+
+func update_water_animation():
+	if self.needs_water:
+		var anim_speed =  0.5 / max(0.1, self.water_content / self.max_water_content)
+		$AnimationPlayer.play("water", -1, anim_speed)
+	else:
+		$AnimationPlayer.stop()
+		$WaterDrop.visible = false

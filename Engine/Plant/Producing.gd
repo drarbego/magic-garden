@@ -25,9 +25,3 @@ func on_ProductionTimer_timeout(plant):
 
 func process(_delta, plant):
 	plant.get_node("ProducedParticles").emitting = plant.produced
-
-	if plant.needs_water:
-		plant.get_node("AnimationPlayer").play("water")
-	else:
-		plant.get_node("AnimationPlayer").stop()
-		plant.get_node("WaterDrop").visible = false
