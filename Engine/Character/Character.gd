@@ -8,6 +8,7 @@ var is_walking = false
 var dir = Vector2.ZERO
 var do_interaction = FuncRef.new()
 
+# replace with water amount
 var water_content:float = 0.0
 
 var fire_balls = 0
@@ -23,6 +24,14 @@ const FireSpellAction = preload("res://ActionTypes/FireSpellAction.tscn")
 
 var action_cursor = 0
 var actions = [WateringAction, FireSpellAction]
+var actions_state = {
+	str(WateringAction): {
+		"amount": 0
+	},
+	str(FireSpellAction): {
+		"amount": 0
+	}
+}
 
 func _ready():
 	var action = WateringAction.instance().init(self, self.world, 20.0)
@@ -60,3 +69,17 @@ func _physics_process(delta):
 	self.dir = Vector2(x, y).normalized()
 
 	move_and_slide(dir * speed)
+
+func increase_action_projectiles(projectile_type, amount):
+	if str(projectile_type) == str(self.FireSpellAction.instance().FireBall):
+		self.actions_state[str(self.FireSpellAction)]["amount"] += amount
+	print(self.actions_state)
+
+func get_current_action_state():
+	return self.actions_state[str(self.actions[self.action_cursor])]
+
+func has_enough_projectiles() -> bool:
+	return self.get_current_action_state()["amount"] > 0
+
+func decrease_projectiles(amount) -> void:
+	self.get_current_action_state()["amount"] -= amount

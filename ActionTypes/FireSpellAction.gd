@@ -13,7 +13,8 @@ func spawn_projectile():
 	self.world.add_child(fire_ball)
 
 func shoot():
-	if cooldown <= 0:
+	if cooldown <= 0 and self.player.has_enough_projectiles():
+		self.player.decrease_projectiles(1)
 		spawn_projectile()
 		self.cooldown = COOLDOWN_TIME
 

@@ -64,12 +64,6 @@ func _on_ProductionTimer_timeout():
 func receive_water():
 	self.water_content = self.max_water_content
 
-func give_product():
-	var player = self.world.get_node("Character")
-	self.produced = false
-	player.fire_balls = 10
-	$ProductionTimer.start()
-
 func update_graphics():
 	$Sprite.set_frame_coords(Vector2(self.stage, self.sprite_row))
 
