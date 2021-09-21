@@ -31,10 +31,8 @@ func _physics_process(delta):
 			self.spawn_projectile()
 
 func _process(delta):
-	pass
-	# $Icon/ContentBar.set_visible(self.is_shooting)
-	# var action_state = self.player.get_current_action_state()
-	# $Icon/ContentBar.set_value(100 * (action_state["amount"] / 5))
+	$Icon/ContentBar.set_visible(self.is_shooting)
+	$Icon/ContentBar.set_value(100 * (self.amount / 5))
 
 
 func spawn_projectile():
