@@ -4,6 +4,19 @@ extends Action
 const FireBall = preload("res://ProjectileTypes/FireBall.tscn")
 const COOLDOWN_TIME := 0.5
 var cooldown := 0.0
+var amount: int = 0
+
+func increase_projectiles_by(_amount):
+	self.amount += _amount
+
+func get_projectile_type():
+	return FireBall
+
+func has_enough_projectiles():
+	return amount > 0
+
+func decrease_projectiles():
+	self.amount -= 1
 
 func spawn_projectile():
 	var fire_ball = FireBall.instance().init(
@@ -13,8 +26,8 @@ func spawn_projectile():
 	self.world.add_child(fire_ball)
 
 func shoot():
-	if cooldown <= 0 and self.player.has_enough_projectiles():
-		self.player.decrease_projectiles(1)
+	if cooldown <= 0 and self.has_enough_projectiles():
+		self.decrease_projectiles()
 		spawn_projectile()
 		self.cooldown = COOLDOWN_TIME
 

@@ -132,4 +132,4 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="Action" type="Node2D" parent="."]
+[node name="Actions" type="Node2D" parent="."]
