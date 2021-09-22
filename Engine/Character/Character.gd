@@ -61,12 +61,3 @@ func increase_action_projectiles(projectile_type, amount):
 	if str(projectile_type) in self.projectile_to_action_index:
 		var index = self.projectile_to_action_index[str(projectile_type)]
 		$Actions.get_child(index).increase_projectiles_by(amount)
-
-func get_current_action_state():
-	return self.actions_state[str(self.actions[self.action_cursor])]
-
-func has_enough_projectiles() -> bool:
-	return self.get_current_action_state()["amount"] > 0
-
-func decrease_projectiles(amount) -> void:
-	self.get_current_action_state()["amount"] -= amount
