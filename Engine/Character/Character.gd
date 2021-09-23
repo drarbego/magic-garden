@@ -13,21 +13,12 @@ var near_plants = {}
 export var world_path: NodePath
 onready var world = get_node(world_path)
 
-const WateringAction = preload("res://ActionTypes/WateringAction.tscn")
-const FireSpellAction = preload("res://ActionTypes/FireSpellAction.tscn")
-
 var action_cursor = 0
-var actions = [WateringAction, FireSpellAction]
-var projectile_to_action_index = {
-	str(WateringAction.instance().WaterDrop): 0,
-	str(FireSpellAction.instance().FireBall): 1
-}
+var projectile_to_action = {}
 
 func _ready():
-	for action_class in self.actions:
-		var action = action_class.instance().init(self, self.world, 20.0)
-		$Actions.add_child(action)
-	$Actions.get_child(self.action_cursor).is_active = true
+	for action in $Actions.get_children():
+		self.projectile_to_action[action.get_projectile_pkg_scene_name()] = action
 
 func _process(delta):
 	var anim_name = "walking" if self.is_walking else "idle"
@@ -46,7 +37,7 @@ func _unhandled_input(event):
 			self.world.spawn_plant(self)
 	if event.is_action_pressed("change_action"):
 		$Actions.get_child(self.action_cursor).is_active = false
-		self.action_cursor = (self.action_cursor + 1) % len(self.actions)
+		self.action_cursor = (self.action_cursor + 1) % $Actions.get_child_count()
 		$Actions.get_child(self.action_cursor).is_active = true
 
 func _physics_process(delta):
@@ -58,6 +49,6 @@ func _physics_process(delta):
 	move_and_slide(dir * speed)
 
 func increase_action_projectiles(projectile_type, amount):
-	if str(projectile_type) in self.projectile_to_action_index:
-		var index = self.projectile_to_action_index[str(projectile_type)]
-		$Actions.get_child(index).increase_projectiles_by(amount)
+	if str(projectile_type) in self.projectile_to_action:
+		var action = self.projectile_to_action[str(projectile_type)]
+		action.increase_projectiles_by(amount)

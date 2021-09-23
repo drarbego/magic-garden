@@ -2,15 +2,14 @@ extends Node2D
 
 class_name Action
 
-var player: Object = null
-var world: Object = null
-var distance: float = 0.0
-var is_active: bool = false
+export var player_path: NodePath
+onready var player: Object = get_node(player_path)
+export var distance: float = 0.0
+export var is_active: bool = false
 
 
 func init(_player: Object, _world: Object, _distance):
 	self.player = _player
-	self.world = _world
 	self.distance = _distance
 
 	return self
@@ -33,5 +32,9 @@ func shoot():
 	pass
 
 func stop_shooting():
+	# NOT IMPLEMENTED
+	pass
+
+func get_projectile_pkg_scene_name():
 	# NOT IMPLEMENTED
 	pass

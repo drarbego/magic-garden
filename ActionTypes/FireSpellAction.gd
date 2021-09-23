@@ -9,8 +9,8 @@ var amount: int = 0
 func increase_projectiles_by(_amount):
 	self.amount += _amount
 
-func get_projectile_type():
-	return FireBall
+func get_projectile_pkg_scene_name():
+	return str(FireBall)
 
 func has_enough_projectiles():
 	return amount > 0
@@ -23,7 +23,7 @@ func spawn_projectile():
 		$Icon.global_position,
 		(get_global_mouse_position() - self.global_position).normalized()
 	)
-	self.world.add_child(fire_ball)
+	self.player.world.add_child(fire_ball)
 
 func shoot():
 	if cooldown <= 0 and self.has_enough_projectiles():

@@ -7,8 +7,8 @@ const COOLDOWN_TIME := 0.1
 var cooldown := COOLDOWN_TIME
 var amount: float = 0.0
 
-func get_projectile_type():
-	return WaterDrop
+func get_projectile_pkg_scene_name():
+	return str(WaterDrop)
 
 func increase_projectiles_by(_amount):
 	self.amount += _amount
@@ -41,7 +41,7 @@ func spawn_projectile():
 		$Icon.global_position,
 		(get_global_mouse_position() - self.global_position).normalized()
 	)
-	self.world.add_child(water_drop)
+	self.player.world.add_child(water_drop)
 
 func shoot():
 	self.is_shooting = true

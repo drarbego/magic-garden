@@ -1,7 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/mage_animations.png" type="Texture" id=1]
 [ext_resource path="res://Engine/Character/Character.gd" type="Script" id=2]
+[ext_resource path="res://ActionTypes/FireSpellAction.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ActionTypes/WateringAction.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -133,3 +135,12 @@ __meta__ = {
 current = true
 
 [node name="Actions" type="Node2D" parent="."]
+
+[node name="WateringAction" parent="Actions" instance=ExtResource( 4 )]
+player_path = NodePath("../..")
+distance = 20.0
+is_active = true
+
+[node name="FireSpellAction" parent="Actions" instance=ExtResource( 3 )]
+player_path = NodePath("../..")
+distance = 20.0
