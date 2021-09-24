@@ -5,13 +5,14 @@ var WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
 var is_shooting = false
 const COOLDOWN_TIME := 0.1
 var cooldown := COOLDOWN_TIME
+var MAX_AMOUNT := 5.0
 var amount: float = 0.0
 
 func get_projectile_pkg_scene_name():
 	return str(WaterDrop)
 
 func increase_projectiles_by(_amount):
-	self.amount += _amount
+	self.amount = clamp(self.amount + _amount, 0.0, MAX_AMOUNT)
 
 func has_enough_projectiles():
 	return amount > 0
