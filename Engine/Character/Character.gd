@@ -18,7 +18,8 @@ var projectile_to_action = {}
 
 func _ready():
 	for action in $Actions.get_children():
-		self.projectile_to_action[action.get_projectile_pkg_scene_name()] = action
+		if action.has_method("get_projectile_pkg_scene_name"):
+			self.projectile_to_action[action.get_projectile_pkg_scene_name()] = action
 
 func _process(delta):
 	var anim_name = "walking" if self.is_walking else "idle"
@@ -32,9 +33,6 @@ func _process(delta):
 	$AnimationPlayer.play(anim_name + "_" + anim_dir)
 
 func _unhandled_input(event):
-	if event.is_action_released("ui_select"):
-		if self.near_plants.empty(): # being lazy
-			self.world.spawn_plant(self)
 	if event.is_action_pressed("change_action"):
 		$Actions.get_child(self.action_cursor).is_active = false
 		self.action_cursor = (self.action_cursor + 1) % $Actions.get_child_count()

@@ -13,7 +13,7 @@ func get_projectile_pkg_scene_name():
 	return str(FireBall)
 
 func has_enough_projectiles():
-	return amount > 0
+	return self.amount > 0
 
 func decrease_projectiles():
 	self.amount -= 1
