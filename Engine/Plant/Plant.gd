@@ -19,21 +19,22 @@ var needs_water = false
 var produced = false
 var is_character_near = false
 onready var current_state = $States/Growing
-var world: Object = null
+var player: Object = null
 
 func change_state(new_state):
 	self.current_state = new_state
 	if self.current_state.has_method("ready"):
 		self.current_state.ready(self)
 
-func init(_world: Object):
-	self.world = _world
+func init(_player: Object):
+	self.player = _player
 
 	return self
 
 func _ready():
 	self.update_graphics()
 	self.change_state($States/Growing)
+	self.player.near_plants[self.get_instance_id()] = self
 
 func _on_HitBox_body_entered(body):
 	if self.current_state.has_method("on_HitBox_body_entered"):

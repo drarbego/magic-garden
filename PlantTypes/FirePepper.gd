@@ -5,8 +5,7 @@ var projectile_amount: int = 5
 
 func give_product():
 	# Se puede parametrizar y mover esta función al padre
-	var player = self.world.get_node("Character")
-	player.increase_action_projectiles(self.projectile, 5)
+	self.player.increase_action_projectiles(self.projectile, 5)
 	self.produced = false
 	$ProductionTimer.start()
 
