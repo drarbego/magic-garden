@@ -1,33 +1,51 @@
 extends Action
 
 
-# figure out a way to make it work for multiple plant types
-const FirePepper = preload("res://PlantTypes/FirePepper.tscn")
+var plant_amount = {}
+var available_plants = []
+var current_plant: int = 0
 
-var amount = 10
+func register_plant(plant_type):
+	self.plant_amount[str(plant_type)] = 0
+	self.available_plants.append(plant_type)
 
-func get_projectile_pkg_scene_name():
-	return str(FirePepper)
+func increase_plant_by(plant_type, _amount):
+	if not str(plant_type) in self.plant_amount:
+		register_plant(plant_type)
 
-func increase_projectiles_by(_amount):
-	self.amount += _amount
+	self.plant_amount[str(plant_type)] += _amount
 
-func has_enough_projectiles():
-	return amount > 0
+func has_enough_plants():
+	if not self.available_plants or not str(self.available_plants[self.current_plant]) in self.plant_amount:
+		return false
 
-func decrease_projectiles_by(_amount):
-	self.amount -= _amount
+	return self.plant_amount[str(self.available_plants[self.current_plant])] > 0
 
+func decrease_plant_by(plant_type, amount):
+	if not str(plant_type) in self.plant_amount:
+		register_plant(plant_type)
+
+	self.plant_amount[str(plant_type)] = max(
+		self.plant_amount[str(plant_type)] - amount,
+		0
+	)
+
+func _unhandled_input(event):
+	if event.is_action_released("ui_left"):
+		self.current_plant = clamp(self.current_plant - 1, 0, len(self.plant_amount) - 1)
+
+	if event.is_action_released("ui_right"):
+		self.current_plant = clamp(self.current_plant + 1, 0, len(self.plant_amount) - 1)
 
 func shoot():
-	if self.player.near_plants.empty() and self.has_enough_projectiles():
-		var fire_pepper = FirePepper.instance().init(self.player)
-		fire_pepper.global_position = self.player.global_position
-		self.player.world.spawn_plant(fire_pepper)
-		self.decrease_projectiles_by(1)
+	if self.player.near_plants.empty() and self.has_enough_plants():
+		var plant = self.available_plants[self.current_plant].instance().init(self.player)
+		plant.global_position = self.player.global_position
+		self.player.world.spawn_plant(plant)
+		self.decrease_plant_by(self.available_plants[self.current_plant], 1)
 
 func _process(delta):
-	if not self.player.near_plants.empty():
+	if not self.has_enough_plants() or not self.player.near_plants.empty():
 		$Icon.modulate.a = 0.35
 	else:
 		$Icon.modulate.a = 1.0

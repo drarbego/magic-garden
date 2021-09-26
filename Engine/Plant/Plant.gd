@@ -45,12 +45,12 @@ func _on_HitBox_body_exited(body):
 		self.current_state.on_HitBox_body_exited(body, self)
 
 func _on_CharacterDetector_body_entered(body):
-	if self.current_state.has_method("on_CharacterDetector_body_entered"):
+	if body is Character and self.current_state.has_method("on_CharacterDetector_body_entered"):
 		self.current_state.on_CharacterDetector_body_entered(body, self)
 		self.is_character_near = true
 
 func _on_CharacterDetector_body_exited(body):
-	if self.current_state.has_method("on_CharacterDetector_body_exited"):
+	if body is Character and self.current_state.has_method("on_CharacterDetector_body_exited"):
 		self.current_state.on_CharacterDetector_body_exited(body, self)
 		self.is_character_near = false
 

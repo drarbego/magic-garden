@@ -95,7 +95,9 @@ scale = 2.0
 scale_curve = SubResource( 8 )
 color = Color( 0.482353, 0.784314, 0.658824, 1 )
 
-[node name="BasePlant" type="Node2D"]
+[node name="BasePlant" type="Node2D" groups=[
+"plants",
+]]
 script = ExtResource( 4 )
 
 [node name="ProductionTimer" type="Timer" parent="."]

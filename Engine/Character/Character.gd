@@ -47,6 +47,8 @@ func _physics_process(delta):
 	move_and_slide(dir * speed)
 
 func increase_action_projectiles(projectile_type, amount):
-	if str(projectile_type) in self.projectile_to_action:
+	if projectile_type.instance().is_in_group("plants"):
+		$Actions/PlantingAction.increase_plant_by(projectile_type, amount)
+	elif str(projectile_type) in self.projectile_to_action:
 		var action = self.projectile_to_action[str(projectile_type)]
 		action.increase_projectiles_by(amount)
