@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Worlds/HomeTown.gd" type="Script" id=1]
 [ext_resource path="res://Engine/Character/Character.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://WaterDispenser.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Engine/Enemy/Enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://SeedDispenser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://SeedDispenser2.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "world-tiles.png 0"
@@ -275,6 +276,9 @@ position = Vector2( 396.903, 91.6577 )
 
 [node name="SeedDispenser" parent="." instance=ExtResource( 6 )]
 position = Vector2( 75.6807, 105.953 )
+
+[node name="SeedDispenser2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 80.8661, 42.8114 )
 
 [node name="Plants" type="Node2D" parent="."]
 
