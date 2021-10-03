@@ -37,3 +37,5 @@ script = ExtResource( 4 )
 [node name="Eating" type="Node" parent="States" index="1"]
 
 [node name="Attacking" type="Node" parent="States" index="2"]
+
+[node name="Hurting" type="Node" parent="States" index="3"]
