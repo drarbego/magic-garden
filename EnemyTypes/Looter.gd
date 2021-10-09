@@ -1,5 +1,6 @@
 extends Enemy
 
+var plants_to_eat = []
 
 func _ready():
 	self.current_state = $States/Wandering
@@ -12,10 +13,15 @@ func on_HitBox_body_entered(body):
 	pass
 
 func on_VisionArea_body_entered(body):
-	# if player -> attacking
-	# if plant -> eating
-	pass
+	self.current_state.on_VisionArea_body_entered(body, self)
 
 func on_VisionArea_body_exited(body):
-	# if player -> wandering
-	pass
+	self.current_state.on_VisionArea_body_exited(body, self)
+
+func get_surrounding_plants():
+	var bodies = []
+	for body in $VisionArea.get_overlapping_bodies():
+		if body is Plant:
+			bodies.append(body)
+
+	return bodies

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/pop_effect.wav" type="AudioStream" id=1]
 [ext_resource path="res://Assets/water_drop.png" type="Texture" id=2]
@@ -7,14 +7,16 @@
 [ext_resource path="res://Engine/Plant/Growing.gd" type="Script" id=5]
 [ext_resource path="res://Engine/Plant/Producing.gd" type="Script" id=6]
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="Curve" id=2]
 max_value = 6.0
 _data = [ Vector2( 0, 3.13636 ), 0.0, -0.173056, 0, 0, Vector2( 0.981013, 5.89091 ), -1.8281, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=2]
-curve = SubResource( 1 )
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 180.0
@@ -25,13 +27,12 @@ orbit_velocity_random = 0.0
 linear_accel = -100.0
 radial_accel = 100.0
 tangential_accel = 100.0
-scale_curve = SubResource( 2 )
+scale_curve = SubResource( 3 )
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=5]
 radius = 23.7942
 
-[sub_resource type="Animation" id=5]
-resource_name = "water"
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("WaterDrop:visible")
@@ -70,16 +71,16 @@ tracks/2/keys = {
 "values": [ Vector2( 12, -20 ), Vector2( 12, -18 ), Vector2( 12, -16 ), Vector2( 12, -14 ), Vector2( 12, -12 ), Vector2( 12, -10 ), Vector2( 12, -8 ), Vector2( 12, -6 ), Vector2( 12, -5 ), Vector2( 12, -4 ), Vector2( 12, -3 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=7]
 radius = 14.0
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=8]
 _data = [ Vector2( 0.0113208, 0.481818 ), 0.0, 0.336152, 0, 0, Vector2( 0.74717, 1 ), 3.80383, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=8]
-curve = SubResource( 7 )
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=10]
 emission_shape = 1
 emission_sphere_radius = 10.0
 flag_disable_z = true
@@ -92,13 +93,16 @@ orbit_velocity_random = 0.0
 linear_accel = -85.0
 damping = 100.0
 scale = 2.0
-scale_curve = SubResource( 8 )
+scale_curve = SubResource( 9 )
 color = Color( 0.333333, 0.643137, 0.941176, 1 )
 
-[node name="BasePlant" type="Node2D" groups=[
+[node name="BasePlant" type="StaticBody2D" groups=[
 "plants",
 ]]
 script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 
 [node name="ProductionTimer" type="Timer" parent="."]
 one_shot = true
@@ -128,22 +132,22 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 0.5
 randomness = 0.5
-process_material = SubResource( 3 )
+process_material = SubResource( 4 )
 
 [node name="CharacterDetector" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterDetector"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/water = SubResource( 5 )
+anims/water = SubResource( 6 )
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="States" type="Node" parent="."]
 
@@ -157,7 +161,7 @@ script = ExtResource( 6 )
 emitting = false
 amount = 15
 lifetime = 0.5
-process_material = SubResource( 9 )
+process_material = SubResource( 10 )
 [connection signal="timeout" from="ProductionTimer" to="." method="_on_ProductionTimer_timeout"]
 [connection signal="timeout" from="GrowthTimer" to="." method="_on_GrowthTimer_timeout"]
 [connection signal="body_entered" from="CharacterDetector" to="." method="_on_CharacterDetector_body_entered"]
