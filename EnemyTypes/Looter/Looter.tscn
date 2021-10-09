@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Engine/Enemy/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/generic_enemy.png" type="Texture" id=2]
-[ext_resource path="res://EnemyTypes/Looter.gd" type="Script" id=3]
-[ext_resource path="res://EnemyTypes/Wandering.gd" type="Script" id=4]
-[ext_resource path="res://EnemyTypes/Eating.gd" type="Script" id=5]
-[ext_resource path="res://EnemyTypes/Attacking.gd" type="Script" id=6]
+[ext_resource path="res://EnemyTypes/Looter/Looter.gd" type="Script" id=2]
+[ext_resource path="res://Assets/generic_enemy.png" type="Texture" id=3]
+[ext_resource path="res://EnemyTypes/Looter/Wandering.gd" type="Script" id=4]
+[ext_resource path="res://EnemyTypes/Looter/Eating.gd" type="Script" id=5]
+[ext_resource path="res://EnemyTypes/Looter/Attacking.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 30.5989
@@ -17,7 +17,7 @@ radius = 43.5627
 radius = 87.8206
 
 [node name="Looter" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 shape = SubResource( 1 )
@@ -29,7 +29,7 @@ shape = SubResource( 2 )
 shape = SubResource( 3 )
 
 [node name="Sprite" parent="." index="3"]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="States" type="Node" parent="." index="4"]
 
