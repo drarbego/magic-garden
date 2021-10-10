@@ -42,9 +42,6 @@ func decrease_plant_by(plant_type, amount):
 	)
 
 func _unhandled_input(event):
-	if not self.is_active:
-		return
-
 	if event.is_action_released("ui_select") and self.available_plants:
 		self.current_plant = (self.current_plant + 1) % len(self.available_plants)
 		self.set_current_plant_texture()

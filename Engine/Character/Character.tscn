@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/mage_animations.png" type="Texture" id=1]
 [ext_resource path="res://Engine/Character/Character.gd" type="Script" id=2]
 [ext_resource path="res://ActionTypes/FireSpellAction.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ActionTypes/WateringAction.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ActionTypes/PlantingAction.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Engine/Actions/ActionCaller.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -135,17 +136,13 @@ __meta__ = {
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="Actions" type="Node2D" parent="."]
+[node name="Actions" type="Node" parent="."]
 
-[node name="WateringAction" parent="Actions" instance=ExtResource( 4 )]
-player_path = NodePath("../..")
-distance = 20.0
-is_active = true
+[node name="WateringActionCaller" parent="Actions" instance=ExtResource( 6 )]
+action_scene = ExtResource( 4 )
 
-[node name="FireSpellAction" parent="Actions" instance=ExtResource( 3 )]
-player_path = NodePath("../..")
-distance = 20.0
+[node name="FireSpellActionCaller" parent="Actions" instance=ExtResource( 6 )]
+action_scene = ExtResource( 3 )
 
-[node name="PlantingAction" parent="Actions" instance=ExtResource( 5 )]
-player_path = NodePath("../..")
-distance = 20.0
+[node name="PlantingActionCaller" parent="Actions" instance=ExtResource( 6 )]
+action_scene = ExtResource( 5 )
