@@ -19,6 +19,14 @@ onready var world = get_node(world_path)
 
 var action_cursor = 0
 
+class Item:
+	var quantity
+	var max_quantity
+
+	func _init(_quantity, _max_quantity):
+		self.quantity = _quantity
+		self.max_quantity = _max_quantity
+
 func _ready():
 	self.set_current_action($Actions.get_child(self.action_cursor))
 
@@ -46,12 +54,15 @@ func _physics_process(delta):
 
 	move_and_slide(dir * speed)
 
-func increase_action_projectiles(projectile_type, amount):
-	if projectile_type.instance().is_in_group("plants"):
-		$Actions/PlantingAction.increase_plant_by(projectile_type, amount)
-	elif str(projectile_type) in self.projectile_to_action:
-		var action = self.projectile_to_action[str(projectile_type)]
-		action.increase_projectiles_by(amount)
+func add_item_to_inventory(item_key: String, quantity, max_quantity=null):
+	if not item_key in self.inventory:
+		self.inventory[item_key] = Item.new(0, max_quantity)
+
+	var item = self.inventory[item_key]
+	if item.max_quantity:
+		item.quantity = clamp(item.quantity + quantity, 0, item.max_quantity)
+	else:
+		self.inventory[item_key].quantity += quantity
 
 func set_current_action(action_caller):
 	if get_node(self.CURRENT_ACTION_NAME):

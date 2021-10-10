@@ -5,20 +5,20 @@ var WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
 var is_shooting = false
 const COOLDOWN_TIME := 0.1
 var cooldown := COOLDOWN_TIME
-var MAX_AMOUNT := 5.0
-var amount: float = 0.0
-
-func get_projectile_pkg_scene_name():
-	return str(WaterDrop)
-
-func increase_projectiles_by(_amount):
-	self.amount = clamp(self.amount + _amount, 0.0, MAX_AMOUNT)
 
 func has_enough_projectiles():
-	return amount > 0
+	var item_key = str(WaterDrop)
+	if not item_key in self.player.inventory:
+		return false
+
+	return self.player.inventory[item_key].quantity > 0
 
 func decrease_projectiles_by(_amount):
-	self.amount -= _amount
+	var item_key = str(WaterDrop)
+	if not item_key in self.player.inventory:
+		return
+
+	self.player.inventory[item_key].quantity -= _amount
 
 func _physics_process(delta):
 	self.cooldown -= delta
@@ -33,8 +33,12 @@ func _physics_process(delta):
 
 func _process(delta):
 	$Icon/ContentBar.set_visible(self.is_shooting)
-	$Icon/ContentBar.set_value(100 * (self.amount / 5))
-
+	var item_key = str(WaterDrop)
+	if item_key in self.player.inventory:
+		var item = self.player.inventory[item_key]
+		$Icon/ContentBar.set_value($Icon/ContentBar.max_value * (item.quantity / item.max_quantity))
+	else:
+		$Icon/ContentBar.set_value(0)
 
 func spawn_projectile():
 	var water_drop = WaterDrop.instance().init(
