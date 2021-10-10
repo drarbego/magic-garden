@@ -20,10 +20,7 @@ onready var world = get_node(world_path)
 var action_cursor = 0
 
 func _ready():
-	pass
-	# for action in $Actions.get_children():
-	# 	if action.has_method("get_projectile_pkg_scene_name"):
-	# 		self.projectile_to_action[action.get_projectile_pkg_scene_name()] = action
+	self.set_current_action($Actions.get_child(self.action_cursor))
 
 func _process(delta):
 	var anim_name = "walking" if self.is_walking else "idle"
@@ -39,8 +36,7 @@ func _process(delta):
 func _unhandled_input(event):
 	if event.is_action_pressed("change_action"):
 		self.action_cursor = (self.action_cursor + 1) % $Actions.get_child_count()
-		var action = $Actions.get_child(self.action_cursor).get_action().init(self, ACTION_DISTANCE)
-		self.set_current_action(action)
+		self.set_current_action($Actions.get_child(self.action_cursor))
 
 func _physics_process(delta):
 	var x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
@@ -57,11 +53,11 @@ func increase_action_projectiles(projectile_type, amount):
 		var action = self.projectile_to_action[str(projectile_type)]
 		action.increase_projectiles_by(amount)
 
-func set_current_action(action):
+func set_current_action(action_caller):
 	if get_node(self.CURRENT_ACTION_NAME):
 		var previous_action = get_node(self.CURRENT_ACTION_NAME)
 		previous_action.set_name(self.CURRENT_ACTION_NAME + "_delete")
 		previous_action.queue_free()
-	
+	var action = action_caller.get_action().init(self, ACTION_DISTANCE)
 	action.set_name(self.CURRENT_ACTION_NAME)
 	add_child(action)
