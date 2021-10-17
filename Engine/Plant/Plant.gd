@@ -10,7 +10,10 @@ export var growth_wait_time := 5.0
 export var growth_wait_scalar := 1.0 # at each stage, growth wait time will increase by water_wait_scalar
 export var max_water_content := 10.0
 onready var water_content = max_water_content
-export var water_loss_per_sec = 1.0
+export var water_loss_per_sec := 1.0
+export var produced_item: PackedScene
+export var produced_item_quantity := 1
+onready var produced_item_key = str(self.produced_item)
 const GROWTH_STAGES_COUNT = 3
 
 # STATE
@@ -61,6 +64,14 @@ func _on_GrowthTimer_timeout():
 func _on_ProductionTimer_timeout():
 	if self.current_state.has_method("on_ProductionTimer_timeout"):
 		self.current_state.on_ProductionTimer_timeout(self)
+
+func _on_GetProduct_pressed():
+	self.give_product()
+
+func give_product():
+	self.player.add_item_to_inventory(self.produced_item_key, self.produced_item_quantity)
+	self.produced = false
+	$ProductionTimer.start()
 
 func receive_water():
 	self.water_content = self.max_water_content
