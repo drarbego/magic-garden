@@ -63,6 +63,7 @@ func add_item_to_inventory(item_key: String, quantity, max_quantity=null):
 		item.quantity = clamp(item.quantity + quantity, 0, item.max_quantity)
 	else:
 		self.inventory[item_key].quantity += quantity
+	print("INVENTORY ", self.inventory)
 
 func set_current_action(action_caller):
 	if get_node(self.CURRENT_ACTION_NAME):
