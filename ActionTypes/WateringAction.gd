@@ -1,24 +1,17 @@
 extends Action
 
-var WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
+const WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
+const item_key = str(WaterDrop)
 
 var is_shooting = false
 const COOLDOWN_TIME := 0.1
 var cooldown := COOLDOWN_TIME
 
 func has_enough_projectiles():
-	var item_key = str(WaterDrop)
-	if not item_key in self.player.inventory:
-		return false
+	return self.player.get_item_quantity(self.item_key) > 0
 
-	return self.player.inventory[item_key].quantity > 0
-
-func decrease_projectiles_by(_amount):
-	var item_key = str(WaterDrop)
-	if not item_key in self.player.inventory:
-		return
-
-	self.player.inventory[item_key].quantity -= _amount
+func decrease_projectiles_by(quantity):
+	self.player.remove_item_from_inventory(self.item_key, quantity)
 
 func _physics_process(delta):
 	self.cooldown -= delta

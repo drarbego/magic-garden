@@ -2,21 +2,15 @@ extends Action
 
 
 const FireBall = preload("res://ProjectileTypes/FireBall.tscn")
+const item_key = str(FireBall) 
 const COOLDOWN_TIME := 0.5
 var cooldown := 0.0
-var amount: int = 0
-
-func increase_projectiles_by(_amount):
-	self.amount += _amount
-
-func get_projectile_pkg_scene_name():
-	return str(FireBall)
 
 func has_enough_projectiles():
-	return self.amount > 0
+	return self.player.get_item_quantity(self.item_key) > 0
 
 func decrease_projectiles():
-	self.amount -= 1
+	self.player.remove_item_from_inventory(self.item_key, 1)
 
 func spawn_projectile():
 	var fire_ball = FireBall.instance().init(
