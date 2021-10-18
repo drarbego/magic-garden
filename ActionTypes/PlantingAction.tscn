@@ -5,9 +5,6 @@
 
 [node name="PlantingAction" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-player_path = null
-distance = null
-is_active = null
 
 [node name="Icon" parent="." index="0"]
 vframes = 5

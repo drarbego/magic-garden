@@ -10,7 +10,10 @@ var available_plants = [
 ]
 var current_plant: int = 0
 
-func set_current_plant_texture():
+func _ready():
+	self.update_current_plant_texture()
+
+func update_current_plant_texture():
 	var plant = self.available_plants[self.current_plant].instance()
 	var plant_sprite = plant.get_node("Sprite")
 	$Icon.set_texture(plant_sprite.get_texture())
@@ -38,7 +41,7 @@ func decrease_current_plant_by(amount):
 func _unhandled_input(event):
 	if event.is_action_released("ui_select") and self.available_plants:
 		self.current_plant = (self.current_plant + 1) % len(self.available_plants)
-		self.set_current_plant_texture()
+		self.update_current_plant_texture()
 
 func shoot():
 	if self.player.near_plants.empty() and self.has_enough_plants():
