@@ -2,7 +2,8 @@ extends Action
 
 
 const FireBall = preload("res://ProjectileTypes/FireBall.tscn")
-const item_key = str(FireBall) 
+const FirePepperSeedItem = preload("res://ItemTypes/FirePepperSeedItem.tscn")
+const item_key = str(FirePepperSeedItem) 
 const COOLDOWN_TIME := 0.5
 var cooldown := 0.0
 

@@ -4,9 +4,16 @@ extends Action
 const FirePepper = preload("res://PlantTypes/FirePepper.tscn")
 const HealingMint = preload("res://PlantTypes/HealingMint.tscn")
 
+const FirePepperSeedItem = preload("res://ItemTypes/FirePepperSeedItem.tscn")
+const HealingMintSeedItem = preload("res://ItemTypes/HealingMintSeedItem.tscn")
+
 var available_plants = [
 	FirePepper,
 	HealingMint
+]
+var available_seeds = [
+	FirePepperSeedItem,
+	HealingMintSeedItem
 ]
 var current_plant: int = 0
 
@@ -22,14 +29,14 @@ func update_current_plant_texture():
 	$Icon.set_frame_coords(Vector2(0, plant.sprite_row))
 
 func has_enough_plants():
-	var item_key = str(self.available_plants[self.current_plant])
+	var item_key = str(self.available_seeds[self.current_plant])
 	if not item_key in self.player.inventory:
 		return false
 
 	return self.player.inventory[item_key].quantity > 0
 
 func decrease_current_plant_by(amount):
-	var item_key = str(self.available_plants[self.current_plant])
+	var item_key = str(self.available_seeds[self.current_plant])
 	if not item_key in self.player.inventory:
 		return
 
