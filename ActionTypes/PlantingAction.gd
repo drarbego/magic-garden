@@ -30,20 +30,11 @@ func update_current_plant_texture():
 
 func has_enough_plants():
 	var item_key = str(self.available_seeds[self.current_plant])
-	if not item_key in self.player.inventory:
-		return false
+	return self.player.get_item_quantity(item_key) > 0
 
-	return self.player.inventory[item_key].quantity > 0
-
-func decrease_current_plant_by(amount):
+func decrease_current_plant_by(quantity):
 	var item_key = str(self.available_seeds[self.current_plant])
-	if not item_key in self.player.inventory:
-		return
-
-	self.player.inventory[item_key].quantity = max(
-		self.player.inventory[item_key].quantity - amount,
-		0
-	)
+	self.player.remove_item_from_inventory(item_key, quantity)
 
 func _unhandled_input(event):
 	if event.is_action_released("ui_select") and self.available_plants:

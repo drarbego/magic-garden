@@ -27,8 +27,8 @@ func _physics_process(delta):
 func _process(delta):
 	$Icon/ContentBar.set_visible(self.is_shooting)
 	var item_key = str(WaterDrop)
-	if item_key in self.player.inventory:
-		var item = self.player.inventory[item_key]
+	var item = self.player.get_item(item_key)
+	if item:
 		$Icon/ContentBar.set_value($Icon/ContentBar.max_value * (item.quantity / item.max_quantity))
 	else:
 		$Icon/ContentBar.set_value(0)

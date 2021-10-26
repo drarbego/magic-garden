@@ -73,6 +73,12 @@ func remove_item_from_inventory(item_key: String, quantity):
 	if item.quantity <= 0:
 		self.inventory.erase(item_key)
 
+func get_item(item_key):
+	if not item_key in self.inventory:
+		return null
+
+	return self.inventory[item_key]
+
 func get_item_quantity(item_key):
 	if not item_key in self.inventory:
 		return 0
