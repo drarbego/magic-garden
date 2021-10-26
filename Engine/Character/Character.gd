@@ -83,9 +83,7 @@ func get_item(item_key):
 	return self.inventory[item_key]
 
 func get_item_quantity(item_key):
-	print("trying to get quantity for ", item_key)
 	if not item_key in self.inventory:
-		print("there's None")
 		return 0
 
 	return self.inventory[item_key].quantity

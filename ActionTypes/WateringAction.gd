@@ -1,7 +1,8 @@
 extends Action
 
 const WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
-const item_key = str(WaterDrop)
+const WaterDropItem = preload("res://ItemTypes/WaterDropItem.tscn")
+const item_key = str(WaterDropItem)
 
 var is_shooting = false
 const COOLDOWN_TIME := 0.1
@@ -26,8 +27,7 @@ func _physics_process(delta):
 
 func _process(delta):
 	$Icon/ContentBar.set_visible(self.is_shooting)
-	var item_key = str(WaterDrop)
-	var item = self.player.get_item(item_key)
+	var item = self.player.get_item(self.item_key)
 	if item:
 		$Icon/ContentBar.set_value($Icon/ContentBar.max_value * (item.quantity / item.max_quantity))
 	else:
