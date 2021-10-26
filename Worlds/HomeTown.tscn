@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Worlds/HomeTown.gd" type="Script" id=1]
 [ext_resource path="res://Engine/Character/Character.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://EnemyTypes/Looter/Looter.tscn" type="PackedScene" id=5]
 [ext_resource path="res://SeedDispenser.tscn" type="PackedScene" id=6]
 [ext_resource path="res://SeedDispenser2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Engine/HUD.tscn" type="PackedScene" id=8]
 
 [sub_resource type="TileSet" id=1]
 0/name = "world-tiles.png 0"
@@ -287,3 +288,5 @@ world_path = NodePath("..")
 
 [node name="Looter" parent="." instance=ExtResource( 5 )]
 position = Vector2( 224.76, 224.76 )
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]

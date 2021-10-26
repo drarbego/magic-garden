@@ -69,7 +69,7 @@ func _on_GetProduct_pressed():
 	self.give_product()
 
 func give_product():
-	self.player.add_item_to_inventory(self.produced_item_key, self.produced_item_quantity)
+	self.player.add_item_to_inventory(self.produced_item, self.produced_item_quantity)
 	self.produced = false
 	$ProductionTimer.start()
 

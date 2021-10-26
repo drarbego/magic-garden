@@ -54,7 +54,8 @@ func _physics_process(delta):
 
 	move_and_slide(dir * speed)
 
-func add_item_to_inventory(item_key: String, quantity, max_quantity=null):
+func add_item_to_inventory(item_class: PackedScene, quantity, max_quantity=null):
+	var item_key = str(item_class)
 	if not item_key in self.inventory:
 		self.inventory[item_key] = Item.new(0, max_quantity)
 
@@ -63,6 +64,8 @@ func add_item_to_inventory(item_key: String, quantity, max_quantity=null):
 		item.quantity = clamp(item.quantity + quantity, 0, item.max_quantity)
 	else:
 		self.inventory[item_key].quantity += quantity
+
+	self.world.add_item_to_hud(item_class.instance())
 
 func remove_item_from_inventory(item_key: String, quantity):
 	if not item_key in self.inventory:
@@ -80,7 +83,9 @@ func get_item(item_key):
 	return self.inventory[item_key]
 
 func get_item_quantity(item_key):
+	print("trying to get quantity for ", item_key)
 	if not item_key in self.inventory:
+		print("there's None")
 		return 0
 
 	return self.inventory[item_key].quantity
