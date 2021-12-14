@@ -1,11 +1,52 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Engine/HUD.gd" type="Script" id=1]
+
+[sub_resource type="Theme" id=1]
+MarginContainer/constants/margin_bottom = 2
+MarginContainer/constants/margin_left = 2
+MarginContainer/constants/margin_right = 2
+MarginContainer/constants/margin_top = 2
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Inventory" type="Control" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 400.0
+margin_right = 160.0
+margin_bottom = 560.0
+
+[node name="Panel" type="Panel" parent="Control/Inventory"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 198.0
+margin_bottom = 198.0
+
+[node name="GridContainer" type="GridContainer" parent="Control/Inventory"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 198.0
+margin_bottom = 198.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShowInventoryButton" type="Button" parent="Control"]
+margin_right = 110.0
+margin_bottom = 20.0
+text = "Show Inventory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Control/ShowInventoryButton" to="." method="_on_ShowInventoryButton_pressed"]
