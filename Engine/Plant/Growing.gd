@@ -13,12 +13,10 @@ func on_HitBox_body_exited(_body, _plant):
 	pass
 
 func on_CharacterDetector_body_entered(body, plant):
-	if body is Character:
-		body.near_plants[plant.get_instance_id()] = plant
+	body.near_plants[plant.get_instance_id()] = plant
 
 func on_CharacterDetector_body_exited(body, plant):
-	if body is Character:
-		body.near_plants.erase(plant.get_instance_id())
+	body.near_plants.erase(plant.get_instance_id())
 
 func on_GrowthTimer_timeout(plant):
 	plant.get_node("PopEffect").play()

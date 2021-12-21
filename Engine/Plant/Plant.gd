@@ -2,6 +2,8 @@ extends Node2D
 
 
 class_name Plant
+# Change to area
+# when player is close, increase magic kind
 
 
 export var sprite_row := 0 # row index for flowers.png
@@ -15,6 +17,7 @@ export var produced_item: PackedScene
 export var produced_item_quantity := 1
 onready var produced_item_key = str(self.produced_item)
 const GROWTH_STAGES_COUNT = 3
+var magic_type = null
 
 # STATE
 var stage = 0 # column index for flowers.png

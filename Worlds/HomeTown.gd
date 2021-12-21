@@ -6,4 +6,4 @@ func spawn_plant(plant):
 	$Plants.add_child(plant)
 
 func add_item_to_hud(item):
-	$HUD/Control/Inventory/GridContainer.add_child(item)
+	$HUD/Control/Inventory/ScrollContainer/GridContainer.add_child(item)

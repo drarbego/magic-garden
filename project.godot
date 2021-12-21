@@ -101,6 +101,14 @@ change_action={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Characters"
+2d_physics/layer_2="Plants"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Walls"
+2d_physics/layer_5="Weapons"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

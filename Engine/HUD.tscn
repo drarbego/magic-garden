@@ -20,23 +20,32 @@ __meta__ = {
 }
 
 [node name="Inventory" type="Control" parent="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 400.0
-margin_right = 160.0
-margin_bottom = 560.0
+anchor_top = 10.0
+anchor_right = 5.0
+anchor_bottom = 15.0
+margin_bottom = -6.10352e-05
 
 [node name="Panel" type="Panel" parent="Control/Inventory"]
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 198.0
 margin_bottom = 198.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="GridContainer" type="GridContainer" parent="Control/Inventory"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 198.0
-margin_bottom = 198.0
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 0.99
+margin_right = 1.52588e-05
+margin_bottom = 2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Control/Inventory/ScrollContainer"]
+margin_right = 200.0
+margin_bottom = 200.0
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false

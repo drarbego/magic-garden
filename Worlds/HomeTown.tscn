@@ -288,5 +288,7 @@ world_path = NodePath("..")
 
 [node name="Looter" parent="." instance=ExtResource( 5 )]
 position = Vector2( 224.76, 224.76 )
+collision_layer = 1
+collision_mask = 1
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]

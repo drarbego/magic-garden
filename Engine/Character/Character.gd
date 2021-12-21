@@ -54,6 +54,7 @@ func _physics_process(delta):
 
 	move_and_slide(dir * speed)
 
+#Re pensar esto
 func add_item_to_inventory(item_class: PackedScene, quantity, max_quantity=null):
 	var item_key = str(item_class)
 	if not item_key in self.inventory:
@@ -65,7 +66,8 @@ func add_item_to_inventory(item_class: PackedScene, quantity, max_quantity=null)
 	else:
 		self.inventory[item_key].quantity += quantity
 
-	self.world.add_item_to_hud(item_class.instance())
+	for _i in range(quantity):
+		self.world.add_item_to_hud(item_class.instance())
 
 func remove_item_from_inventory(item_key: String, quantity):
 	if not item_key in self.inventory:
@@ -96,3 +98,9 @@ func set_current_action(action_caller):
 	var action = action_caller.get_action().init(self, ACTION_DISTANCE)
 	action.set_name(self.CURRENT_ACTION_NAME)
 	add_child(action)
+
+func increase_magic_type(magic_type):
+	pass
+
+func stop_increasing_magic_type(magic_type):
+	pass

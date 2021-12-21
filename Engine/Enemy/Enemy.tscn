@@ -3,6 +3,8 @@
 [ext_resource path="res://Engine/Enemy/Enemy.gd" type="Script" id=2]
 
 [node name="Enemy" type="KinematicBody2D"]
+collision_layer = 13
+collision_mask = 13
 script = ExtResource( 2 )
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -10,6 +12,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="VisionArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="."]
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]
