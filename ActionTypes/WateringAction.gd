@@ -27,6 +27,9 @@ func _physics_process(delta):
 
 func _process(delta):
 	$Icon/ContentBar.set_visible(self.is_shooting)
+	if not $Icon/ContentBar.visible:
+		return
+
 	var item = self.player.get_item(self.item_key)
 	if item:
 		$Icon/ContentBar.set_value($Icon/ContentBar.max_value * (item.quantity / item.max_quantity))

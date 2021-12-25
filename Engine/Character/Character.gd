@@ -11,7 +11,7 @@ var is_walking = false
 var dir = Vector2.ZERO
 
 var near_plants = {}
-var inventory = {}
+onready var inventory = Inventory.new(self, 10)
 
 
 export var world_path: NodePath
@@ -19,13 +19,57 @@ onready var world = get_node(world_path)
 
 var action_cursor = 0
 
-class Item:
-	var quantity
-	var max_quantity
+class Inventory:
+	# add concept of weight
+	class Item:
+		var quantity
+		var max_quantity
+		var klass
 
-	func _init(_quantity, _max_quantity):
-		self.quantity = _quantity
-		self.max_quantity = _max_quantity
+		func _init(_quantity, _max_quantity, _klass):
+			self.quantity = _quantity
+			self.max_quantity = _max_quantity
+			self.klass = _klass
+
+
+	var items := {}
+	var max_capacity: int
+	var character
+
+	func _init(_character, _max_capacity: int):
+		self.character = _character
+		self.max_capacity = _max_capacity
+
+	func add_item(item_class: PackedScene, quantity, max_quantity=null):
+		var item_key = str(item_class)
+		if not item_key in self.items:
+			self.items[item_key] = Item.new(0, max_quantity, item_class)
+
+		var item = self.items[item_key]
+		if item.max_quantity:
+			item.quantity = clamp(item.quantity + quantity, 0, item.max_quantity)
+		else:
+			self.items[item_key].quantity += quantity
+
+	func remove_item(item_key: String, quantity):
+		if not item_key in self.items:
+			return
+
+		var item = self.items[item_key]
+		item.quantity -= quantity
+		if item.quantity <= 0:
+			self.items.erase(item_key)
+
+	func get_item(item_key):
+		return items.get(item_key, null)
+
+	func get_ui_elements():
+		var results = []
+
+		for item_key in self.items:
+			results.append(self.items[item_key].klass.instance())
+
+		return results
 
 func _ready():
 	self.set_current_action($Actions.get_child(self.action_cursor))
@@ -56,39 +100,19 @@ func _physics_process(delta):
 
 #Re pensar esto
 func add_item_to_inventory(item_class: PackedScene, quantity, max_quantity=null):
-	var item_key = str(item_class)
-	if not item_key in self.inventory:
-		self.inventory[item_key] = Item.new(0, max_quantity)
-
-	var item = self.inventory[item_key]
-	if item.max_quantity:
-		item.quantity = clamp(item.quantity + quantity, 0, item.max_quantity)
-	else:
-		self.inventory[item_key].quantity += quantity
-
-	for _i in range(quantity):
-		self.world.add_item_to_hud(item_class.instance())
+	self.inventory.add_item(item_class, quantity, max_quantity)
+	self.world.set_hud_items(self.inventory.get_ui_elements())
 
 func remove_item_from_inventory(item_key: String, quantity):
-	if not item_key in self.inventory:
-		return
-
-	var item = self.inventory[item_key]
-	item.quantity -= quantity
-	if item.quantity <= 0:
-		self.inventory.erase(item_key)
+	self.inventory.remove_item(item_key, quantity)
+	self.world.set_hud_items(self.inventory.get_ui_elements())
 
 func get_item(item_key):
-	if not item_key in self.inventory:
-		return null
-
-	return self.inventory[item_key]
+	return self.inventory.get_item(item_key)
 
 func get_item_quantity(item_key):
-	if not item_key in self.inventory:
-		return 0
-
-	return self.inventory[item_key].quantity
+	var item = self.inventory.get_item(item_key)
+	return item.quantity if item else 0
 
 func set_current_action(action_caller):
 	if get_node(self.CURRENT_ACTION_NAME):
