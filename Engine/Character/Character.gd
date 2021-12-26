@@ -67,7 +67,8 @@ class Inventory:
 		var results = []
 
 		for item_key in self.items:
-			results.append(self.items[item_key].klass.instance())
+			var item = self.items[item_key]
+			results.append(item.klass.instance().init(item.quantity))
 
 		return results
 
