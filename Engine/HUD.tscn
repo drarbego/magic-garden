@@ -1,12 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Engine/HUD.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.247059, 0.211765, 0.211765, 0.25098 )
 
 [sub_resource type="Theme" id=1]
 MarginContainer/constants/margin_bottom = 2
 MarginContainer/constants/margin_left = 2
 MarginContainer/constants/margin_right = 2
 MarginContainer/constants/margin_top = 2
+Panel/styles/panel = SubResource( 2 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -20,42 +24,32 @@ __meta__ = {
 }
 
 [node name="Inventory" type="Control" parent="Control"]
-anchor_top = 10.0
-anchor_right = 5.0
-anchor_bottom = 15.0
-margin_bottom = -6.10352e-05
+anchor_top = 18.025
+anchor_right = 19.3
+anchor_bottom = 27.05
+margin_top = -153.0
+margin_right = -4.0
+margin_bottom = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Panel" type="Panel" parent="Control/Inventory"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 198.0
-margin_bottom = 198.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control/Inventory"]
 anchor_right = 1.0
-anchor_bottom = 0.99
-margin_right = 1.52588e-05
-margin_bottom = 2.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="Control/Inventory/ScrollContainer"]
-margin_right = 200.0
-margin_bottom = 200.0
 columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ShowInventoryButton" type="Button" parent="Control"]
-margin_right = 110.0
-margin_bottom = 20.0
-text = "Show Inventory"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="Control/ShowInventoryButton" to="." method="_on_ShowInventoryButton_pressed"]
