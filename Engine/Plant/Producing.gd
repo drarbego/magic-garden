@@ -14,11 +14,11 @@ func on_HitBox_body_exited(_body, _plant):
 
 func on_CharacterDetector_body_entered(character, plant):
 	character.near_plants[plant.get_instance_id()] = plant
-	character.increase_magic_type(plant.magic_type)
+	character.increase_energy(plant.energy_increase_per_sec)
 
 func on_CharacterDetector_body_exited(character, plant):
 	character.near_plants.erase(plant.get_instance_id())
-	character.stop_increasing_magic_type(plant.magic_type)
+	character.stop_increasing_energy()
 
 func on_ProductionTimer_timeout(plant):
 	plant.produced = true

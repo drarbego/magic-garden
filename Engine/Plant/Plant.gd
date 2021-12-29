@@ -14,7 +14,10 @@ export var max_water_content := 10.0
 onready var water_content = max_water_content
 export var water_loss_per_sec := 1.0
 export var produced_item: PackedScene
+export var spell: PackedScene = null
 export var produced_item_quantity := 1
+export var energy_increase_per_sec := 0.0
+export var energy_cost := 0.0
 onready var produced_item_key = str(self.produced_item)
 const GROWTH_STAGES_COUNT = 3
 var magic_type = null
@@ -82,6 +85,12 @@ func receive_water():
 func update_graphics():
 	$Sprite.set_frame_coords(Vector2(self.stage, self.sprite_row))
 
+func get_spell():
+	return self.spell
+
+func get_energy_cost():
+	return self.energy_cost
+
 func _process(delta):
 	self.water_content = clamp(
 		self.water_content - self.water_loss_per_sec * delta,
@@ -107,5 +116,3 @@ func update_water_animation():
 func handle_impact(projectile):
 	if projectile is WaterDrop:
 		self.receive_water()
-	if projectile is FireBall:
-		self.queue_free()

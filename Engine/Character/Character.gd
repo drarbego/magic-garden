@@ -5,11 +5,18 @@ class_name Character
 
 const CURRENT_ACTION_NAME = "CurrentAction"
 const ACTION_DISTANCE = 30
+const MAX_ENERGY = 10.0
 
 var speed = 300
 var is_walking = false
 var dir = Vector2.ZERO
+var is_increasing_energy = false
 
+var energy = 0.0
+var energy_increase_per_sec = 0.0
+
+# make it a reference to the plant obj and only
+# make it null if is the same instance id
 var near_plants = {}
 onready var inventory = Inventory.new(self, 10)
 
@@ -92,6 +99,12 @@ func _unhandled_input(event):
 		self.set_current_action($Actions.get_child(self.action_cursor))
 
 func _physics_process(delta):
+	if self.is_increasing_energy:
+		self.energy = clamp(
+			self.energy + self.energy_increase_per_sec * delta,
+			0.0,
+			10.0
+		)
 	var x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	var y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	self.is_walking = x or y
@@ -124,8 +137,27 @@ func set_current_action(action_caller):
 	action.set_name(self.CURRENT_ACTION_NAME)
 	add_child(action)
 
-func increase_magic_type(magic_type):
-	pass
+func get_current_plant():
+	if self.near_plants.empty():
+		return null
 
-func stop_increasing_magic_type(magic_type):
-	pass
+	return self.near_plants.get(
+		self.near_plants.keys()[0]
+	)
+
+func get_plant_spell():
+	var plant = self.get_current_plant()
+
+	if not plant:
+		return null
+
+	return plant.get_spell()
+
+
+func increase_energy(increase):
+	self.is_increasing_energy = true
+	self.energy_increase_per_sec = increase
+
+func stop_increasing_energy():
+	self.energy = 0.0
+	self.is_increasing_energy = false
