@@ -7,13 +7,13 @@ const COOLDOWN_TIME := 0.5
 var cooldown := 0.0
 
 func has_enough_energy():
-	print(self.player.energy)
 	var plant = self.player.get_current_plant()
+	print(plant.energy)
 
 	if not plant:
 		return false
 
-	return self.player.energy >= plant.get_energy_cost()
+	return plant.has_enough_energy()
 
 func decrease_energy():
 	var plant = self.player.get_current_plant()
@@ -21,7 +21,7 @@ func decrease_energy():
 	if not plant:
 		return
 
-	self.player.energy -= plant.get_energy_cost()
+	plant.decrease_energy()
 
 func trigger_spell(spell):
 	var instance = spell.instance().init(

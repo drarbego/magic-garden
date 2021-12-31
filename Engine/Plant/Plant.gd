@@ -16,6 +16,7 @@ export var water_loss_per_sec := 1.0
 export var produced_item: PackedScene
 export var spell: PackedScene = null
 export var produced_item_quantity := 1
+const MAX_ENERGY = 10.0
 export var energy_increase_per_sec := 0.0
 export var energy_cost := 0.0
 onready var produced_item_key = str(self.produced_item)
@@ -29,6 +30,9 @@ var produced = false
 var is_character_near = false
 onready var current_state = $States/Growing
 var player: Object = null
+
+var is_increasing_energy = false
+var energy = 0.0
 
 func change_state(new_state):
 	self.current_state = new_state
@@ -116,3 +120,15 @@ func update_water_animation():
 func handle_impact(projectile):
 	if projectile is WaterDrop:
 		self.receive_water()
+
+func has_enough_energy():
+	return self.energy >= self.energy_cost
+
+func decrease_energy():
+	self.energy -= self.energy_cost
+
+func increase_energy():
+	self.is_increasing_energy = true
+
+func stop_increasing_energy():
+	self.is_increasing_energy = false
