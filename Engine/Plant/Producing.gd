@@ -23,7 +23,7 @@ func on_CharacterDetector_body_exited(character, plant):
 func on_ProductionTimer_timeout(plant):
 	plant.produced = true
 	if plant.is_character_near:
-		plant.player.increase_energy(plant.energy_increase_per_sec)
+		plant.increase_energy()
 
 func process(delta, plant):
 	plant.get_node("ProducedParticles").emitting = plant.produced

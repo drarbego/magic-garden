@@ -8,7 +8,6 @@ var cooldown := 0.0
 
 func has_enough_energy():
 	var plant = self.player.get_current_plant()
-	print(plant.energy)
 
 	if not plant:
 		return false
