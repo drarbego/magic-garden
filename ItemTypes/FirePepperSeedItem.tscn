@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Engine/Item.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Engine/HUD/Item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/fire_pepper_with_texture.png" type="Texture" id=2]
+
 
 [node name="FirePepperSeedItem" instance=ExtResource( 1 )]
 anchor_right = 0.25

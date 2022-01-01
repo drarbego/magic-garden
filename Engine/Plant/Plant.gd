@@ -105,6 +105,7 @@ func _process(delta):
 	if self.water_content <= 0:
 		self.queue_free()
 	self.update_water_animation()
+	$EnergyBar.value = (self.energy / self.MAX_ENERGY) * $EnergyBar.max_value
 
 	if self.current_state.has_method("process"):
 		self.current_state.process(delta, self)
@@ -126,9 +127,3 @@ func has_enough_energy():
 
 func decrease_energy():
 	self.energy -= self.energy_cost
-
-func increase_energy():
-	self.is_increasing_energy = true
-
-func stop_increasing_energy():
-	self.is_increasing_energy = false

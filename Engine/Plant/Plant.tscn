@@ -165,6 +165,17 @@ emitting = false
 amount = 15
 lifetime = 0.5
 process_material = SubResource( 10 )
+
+[node name="EnergyBar" type="ProgressBar" parent="."]
+margin_left = -20.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 20, 5 )
+rect_rotation = -90.0
+step = 1.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="ProductionTimer" to="." method="_on_ProductionTimer_timeout"]
 [connection signal="timeout" from="GrowthTimer" to="." method="_on_GrowthTimer_timeout"]
 [connection signal="body_entered" from="CharacterDetector" to="." method="_on_CharacterDetector_body_entered"]
