@@ -9,8 +9,8 @@ func physics_process(delta):
 	self.current_state.physics_process(delta, self)
 
 func on_HitBox_body_entered(body):
-	# damage -> hurting
-	pass
+	if body is Projectile:
+		queue_free()
 
 func on_VisionArea_body_entered(body):
 	self.current_state.on_VisionArea_body_entered(body, self)
