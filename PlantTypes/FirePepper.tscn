@@ -46,4 +46,5 @@ alignment = 1
 margin_right = 84.0
 margin_bottom = 20.0
 text = "GetProduct"
+
 [connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/GetProduct" to="." method="_on_GetProduct_pressed"]

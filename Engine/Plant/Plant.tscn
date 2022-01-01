@@ -124,9 +124,7 @@ ProgressBar/fonts/font = null
 ProgressBar/styles/bg = SubResource( 11 )
 ProgressBar/styles/fg = SubResource( 12 )
 
-[node name="BasePlant" type="StaticBody2D" groups=[
-"plants",
-]]
+[node name="BasePlant" type="StaticBody2D" groups=["plants"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 4 )
@@ -144,8 +142,8 @@ one_shot = true
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -6 )
 texture = ExtResource( 3 )
-vframes = 5
 hframes = 3
+vframes = 5
 
 [node name="WaterDrop" type="Sprite" parent="."]
 position = Vector2( 12, -20 )
@@ -174,8 +172,8 @@ shape = SubResource( 5 )
 anims/water = SubResource( 6 )
 
 [node name="HitBox" type="Area2D" parent="."]
-collision_layer = 2048
-collision_mask = 2048
+collision_layer = 32
+collision_mask = 48
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 shape = SubResource( 7 )
@@ -207,6 +205,7 @@ percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="timeout" from="ProductionTimer" to="." method="_on_ProductionTimer_timeout"]
 [connection signal="timeout" from="GrowthTimer" to="." method="_on_GrowthTimer_timeout"]
 [connection signal="body_entered" from="CharacterDetector" to="." method="_on_CharacterDetector_body_entered"]
