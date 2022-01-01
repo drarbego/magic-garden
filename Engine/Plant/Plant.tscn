@@ -192,7 +192,14 @@ amount = 15
 lifetime = 0.5
 process_material = SubResource( 10 )
 
-[node name="EnergyBar" type="ProgressBar" parent="."]
+[node name="Display" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnergyBar" type="ProgressBar" parent="Display"]
 margin_left = -20.0
 margin_right = 25.0
 margin_bottom = 8.0

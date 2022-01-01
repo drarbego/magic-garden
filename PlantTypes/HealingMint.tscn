@@ -7,3 +7,9 @@
 [node name="HealingMint" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 produced_item = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Display" index="1"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Healing Mint
+"

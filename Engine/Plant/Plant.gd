@@ -78,6 +78,7 @@ func _on_ProductionTimer_timeout():
 func _on_GetProduct_pressed():
 	self.give_product()
 
+# TODO rethink this mechanism
 func give_product():
 	self.player.add_item_to_inventory(self.produced_item, self.produced_item_quantity)
 	self.produced = false
@@ -96,6 +97,7 @@ func get_energy_cost():
 	return self.energy_cost
 
 func _process(delta):
+	$Display.set_visible(self.is_character_near)
 	self.water_content = clamp(
 		self.water_content - self.water_loss_per_sec * delta,
 		0,
@@ -105,7 +107,7 @@ func _process(delta):
 	if self.water_content <= 0:
 		self.queue_free()
 	self.update_water_animation()
-	$EnergyBar.value = (self.energy / self.MAX_ENERGY) * $EnergyBar.max_value
+	$Display/EnergyBar.value = (self.energy / self.MAX_ENERGY) * $Display/EnergyBar.max_value
 
 	if self.current_state.has_method("process"):
 		self.current_state.process(delta, self)
