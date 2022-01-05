@@ -1,7 +1,7 @@
 [gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Engine/Character/Character.gd" type="Script" id=2]
-[ext_resource path="res://ActionTypes/FireSpellAction.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ActionTypes/SpellAction.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ActionTypes/WateringAction.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ActionTypes/PlantingAction.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Engine/Actions/ActionCaller.tscn" type="PackedScene" id=6]
@@ -124,7 +124,7 @@ animation = "idle_up"
 [node name="WateringActionCaller" parent="Actions" instance=ExtResource( 6 )]
 action_scene = ExtResource( 4 )
 
-[node name="FireSpellActionCaller" parent="Actions" instance=ExtResource( 6 )]
+[node name="SpellActionCaller" parent="Actions" instance=ExtResource( 6 )]
 action_scene = ExtResource( 3 )
 
 [node name="PlantingActionCaller" parent="Actions" instance=ExtResource( 6 )]
