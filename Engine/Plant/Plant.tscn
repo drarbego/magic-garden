@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/pop_effect.wav" type="AudioStream" id=1]
 [ext_resource path="res://Assets/water_drop.png" type="Texture" id=2]
-[ext_resource path="res://Assets/flowers.png" type="Texture" id=3]
 [ext_resource path="res://Engine/Plant/Plant.gd" type="Script" id=4]
 [ext_resource path="res://Engine/Plant/Growing.gd" type="Script" id=5]
 [ext_resource path="res://Engine/Plant/Producing.gd" type="Script" id=6]
@@ -140,10 +139,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -6 )
-texture = ExtResource( 3 )
-hframes = 3
-vframes = 5
+position = Vector2( -12, -34 )
 
 [node name="WaterDrop" type="Sprite" parent="."]
 position = Vector2( 12, -20 )

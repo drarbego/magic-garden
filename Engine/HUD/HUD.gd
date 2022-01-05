@@ -6,4 +6,4 @@ func _unhandled_input(event):
 		self.toggle_hud()
 
 func toggle_hud():
-	$Control/Inventory.set_visible(!$Control/Inventory.visible)
+	$Inventory.set_visible(!$Inventory.visible)

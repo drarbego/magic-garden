@@ -3,12 +3,12 @@
 [ext_resource path="res://Engine/HUD/Item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/fire_pepper_with_texture.png" type="Texture" id=2]
 
-
 [node name="FirePepperSeedItem" instance=ExtResource( 1 )]
 anchor_right = 0.25
 anchor_bottom = 0.427
-margin_bottom = -0.200012
-rect_min_size = Vector2( 256, 256 )
+margin_right = -380.0
+margin_bottom = -361.16
+rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 2 )
 expand = true
 stretch_mode = 1

@@ -6,7 +6,6 @@ class_name Plant
 # when player is close, increase magic kind
 
 
-export var sprite_row := 0 # row index for flowers.png
 export var production_wait_time := 5.0
 export var growth_wait_time := 5.0
 export var growth_wait_scalar := 1.0 # at each stage, growth wait time will increase by water_wait_scalar
@@ -16,6 +15,9 @@ export var water_loss_per_sec := 1.0
 export var produced_item: PackedScene
 export var spell: PackedScene = null
 export var produced_item_quantity := 1
+export var texture_stage_0 : Texture = null
+export var texture_stage_1 : Texture = null
+export var texture_stage_2 : Texture = null
 const MAX_ENERGY = 10.0
 export var energy_increase_per_sec := 0.0
 export var energy_cost := 0.0
@@ -88,7 +90,12 @@ func receive_water():
 	self.water_content = self.max_water_content
 
 func update_graphics():
-	$Sprite.set_frame_coords(Vector2(self.stage, self.sprite_row))
+	if self.stage == 0:
+		$Sprite.set_texture(self.texture_stage_0)
+	if self.stage == 1:
+		$Sprite.set_texture(self.texture_stage_1)
+	if self.stage == 2:
+		$Sprite.set_texture(self.texture_stage_2)
 
 func get_spell():
 	return self.spell

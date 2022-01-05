@@ -5,7 +5,3 @@
 
 [node name="PlantingAction" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-
-[node name="Icon" parent="." index="0"]
-vframes = 5
-hframes = 3

@@ -22,11 +22,8 @@ func _ready():
 
 func update_current_plant_texture():
 	var plant = self.available_plants[self.current_plant].instance()
-	var plant_sprite = plant.get_node("Sprite")
-	$Icon.set_texture(plant_sprite.get_texture())
-	$Icon.vframes = plant_sprite.vframes
-	$Icon.hframes = plant_sprite.hframes
-	$Icon.set_frame_coords(Vector2(0, plant.sprite_row))
+	var plant_texture = plant.texture_stage_0
+	$Icon.set_texture(plant_texture)
 
 func has_enough_plants():
 	var item_key = str(self.available_seeds[self.current_plant])

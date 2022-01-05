@@ -1,17 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Engine/Plant/Plant.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PlantTypes/FirePepper.gd" type="Script" id=2]
 [ext_resource path="res://ProjectileTypes/FireBall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ItemTypes/FirePepperSeedItem.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/fire_pepper_100.png" type="Texture" id=5]
+[ext_resource path="res://Assets/fire_pepper_150.png" type="Texture" id=6]
+[ext_resource path="res://Assets/fire_pepper_75.png" type="Texture" id=7]
 
 [node name="FirePepper" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-sprite_row = 3
 max_water_content = 120.0
 produced_item = ExtResource( 4 )
 spell = ExtResource( 3 )
 produced_item_quantity = 5
+texture_stage_0 = ExtResource( 7 )
+texture_stage_1 = ExtResource( 5 )
+texture_stage_2 = ExtResource( 6 )
 energy_increase_per_sec = 1.0
 energy_cost = 4.0
 

@@ -78,15 +78,16 @@ func _ready():
 	self.set_current_action($Actions.get_child(self.action_cursor))
 
 func _process(delta):
-	var anim_name = "walking" if self.is_walking else "idle"
+	var anim_name = "walk" if self.is_walking else "idle"
 	var anim_dir = "down"
 	if self.dir.y < 0:
 		anim_dir = "up"
-	if self.dir.x != 0:
-		anim_dir = "side"
+	if self.dir.x < 0:
+		anim_dir = "left"
+	if self.dir.x > 0:
+		anim_dir = "right"
 
-	$Sprite.flip_h = (anim_dir == "side" and self.dir.x > 0)
-	$AnimationPlayer.play(anim_name + "_" + anim_dir)
+	$AnimatedSprite.play(anim_name + "_" + anim_dir)
 
 func _unhandled_input(event):
 	if event.is_action_pressed("change_action"):

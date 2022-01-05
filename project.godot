@@ -57,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Magic Garden"
-run/main_scene="res://Worlds/HomeTown.tscn"
+run/main_scene="res://Worlds/World.tscn"
 config/icon="res://icon.png"
 
 [display]

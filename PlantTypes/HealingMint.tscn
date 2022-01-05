@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Engine/Plant/Plant.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PlantTypes/HealingMint.gd" type="Script" id=2]
 [ext_resource path="res://ItemTypes/HealingMintSeedItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/healing_mint_100.png" type="Texture" id=4]
+[ext_resource path="res://Assets/healing_mint_150.png" type="Texture" id=5]
+[ext_resource path="res://Assets/healing_mint_75.png" type="Texture" id=6]
 
 [node name="HealingMint" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 produced_item = ExtResource( 3 )
+texture_stage_0 = ExtResource( 6 )
+texture_stage_1 = ExtResource( 4 )
+texture_stage_2 = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="Display" index="1"]
 margin_right = 40.0
