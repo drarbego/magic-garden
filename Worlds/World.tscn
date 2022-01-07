@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Worlds/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/world-tiles.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://EnemyTypes/Looter/Looter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/theme.mp3" type="AudioStream" id=8]
 [ext_resource path="res://Engine/HUD/HUD.tscn" type="PackedScene" id=9]
+[ext_resource path="res://SeedDispenser3.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "world-tiles.png 0"
@@ -281,6 +282,9 @@ position = Vector2( 75.6807, 105.953 )
 
 [node name="SeedDispenser2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 80.8661, 42.8114 )
+
+[node name="SeedDispenser3" parent="." instance=ExtResource( 10 )]
+position = Vector2( 172, 50 )
 
 [node name="Plants" type="Node2D" parent="."]
 

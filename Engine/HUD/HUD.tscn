@@ -34,7 +34,7 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="Inventory/ScrollContainer"]
-columns = 3
+columns = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

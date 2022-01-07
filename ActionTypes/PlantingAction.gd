@@ -3,17 +3,21 @@ extends Action
 
 const FirePepper = preload("res://PlantTypes/FirePepper.tscn")
 const HealingMint = preload("res://PlantTypes/HealingMint.tscn")
+const ElectricStar = preload("res://PlantTypes/ElectricStar.tscn")
 
 const FirePepperSeedItem = preload("res://ItemTypes/FirePepperSeedItem.tscn")
 const HealingMintSeedItem = preload("res://ItemTypes/HealingMintSeedItem.tscn")
+const ElectricStarSeedItem = preload("res://ItemTypes/ElectricStarSeedItem.tscn")
 
 var available_plants = [
 	FirePepper,
-	HealingMint
+	HealingMint,
+	ElectricStar
 ]
 var available_seeds = [
 	FirePepperSeedItem,
-	HealingMintSeedItem
+	HealingMintSeedItem,
+	ElectricStarSeedItem
 ]
 var current_plant: int = 0
 
