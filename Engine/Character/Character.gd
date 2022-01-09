@@ -74,6 +74,10 @@ class Inventory:
 
 		return results
 
+# should be used to configure the character after receiving the data from character creation
+func init():
+	pass
+
 func _ready():
 	self.set_current_action($Actions.get_child(self.action_cursor))
 
@@ -126,6 +130,9 @@ func set_current_action(action_caller):
 	var action = action_caller.get_action().init(self, ACTION_DISTANCE)
 	action.set_name(self.CURRENT_ACTION_NAME)
 	add_child(action)
+
+func get_current_action():
+	return self.get_node(self.CURRENT_ACTION_NAME)
 
 func get_current_plant():
 	if self.near_plants.empty():

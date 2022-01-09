@@ -1,15 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/electric_star_100.png" type="Texture" id=1]
 [ext_resource path="res://Assets/electric_star_150.png" type="Texture" id=2]
 [ext_resource path="res://Engine/Plant/Plant.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/electric_star_75.png" type="Texture" id=4]
 [ext_resource path="res://ItemTypes/ElectricStarSeedItem.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ProjectileTypes/Electricity.tscn" type="PackedScene" id=6]
+[ext_resource path="res://PlantTypes/ElectricStar.gd" type="Script" id=7]
 
 [node name="BasePlant" instance=ExtResource( 3 )]
-max_water_content = 60.0
+script = ExtResource( 7 )
+growth_wait_time = 2.0
+max_water_content = 120.0
 produced_item = ExtResource( 5 )
+spell = ExtResource( 6 )
 texture_stage_0 = ExtResource( 4 )
 texture_stage_1 = ExtResource( 1 )
 texture_stage_2 = ExtResource( 2 )
-energy_increase_per_sec = 5.0
+energy_increase_per_sec = 1.0
+energy_cost = 1.0

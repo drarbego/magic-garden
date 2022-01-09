@@ -18,12 +18,14 @@ export var produced_item_quantity := 1
 export var texture_stage_0 : Texture = null
 export var texture_stage_1 : Texture = null
 export var texture_stage_2 : Texture = null
+export var COOLDOWN_TIME := 0.5
 const MAX_ENERGY = 10.0
 export var energy_increase_per_sec := 0.0
 export var energy_cost := 0.0
 onready var produced_item_key = str(self.produced_item)
 const GROWTH_STAGES_COUNT = 3
 var magic_type = null
+var cooldown := 0.0
 
 # STATE
 var stage = 0 # column index for flowers.png
@@ -119,6 +121,10 @@ func _process(delta):
 	if self.current_state.has_method("process"):
 		self.current_state.process(delta, self)
 
+func _physics_process(delta):
+	if self.cooldown > 0:
+		self.cooldown -= delta
+
 func update_water_animation():
 	if self.needs_water:
 		var anim_speed =  0.5 / max(0.1, self.water_content / self.max_water_content)
@@ -136,3 +142,9 @@ func has_enough_energy():
 
 func decrease_energy():
 	self.energy -= self.energy_cost
+
+func shoot():
+	pass
+
+func stop_shooting():
+	pass

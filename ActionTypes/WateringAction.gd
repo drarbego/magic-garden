@@ -4,6 +4,10 @@ const WaterDrop = preload("res://ProjectileTypes/WaterDrop.tscn")
 const WaterDropItem = preload("res://ItemTypes/WaterDropItem.tscn")
 const item_key = str(WaterDropItem)
 
+
+# move is_shooting logic to base action (is_triggered)
+# change concept of shooting to triggerig
+
 var is_shooting = false
 const COOLDOWN_TIME := 0.1
 var cooldown := COOLDOWN_TIME

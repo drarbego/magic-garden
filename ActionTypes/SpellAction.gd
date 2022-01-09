@@ -1,8 +1,6 @@
 extends Action
 
 
-const FirePepperSeedItem = preload("res://ItemTypes/FirePepperSeedItem.tscn")
-const item_key = str(FirePepperSeedItem) 
 const COOLDOWN_TIME := 0.5
 var cooldown := 0.0
 
@@ -22,24 +20,18 @@ func decrease_energy():
 
 	plant.decrease_energy()
 
-func trigger_spell(spell):
-	var instance = spell.instance().init(
-		$Icon.global_position,
-		(get_global_mouse_position() - self.global_position).normalized()
-	)
-	self.player.world.add_child(instance)
-
 func shoot():
-	var spell = self.player.get_plant_spell()
+	var plant = self.player.get_current_plant()
 
-	if not spell:
+	if not plant:
 		return
 
-	if cooldown <= 0 and self.has_enough_energy():
-		self.decrease_energy()
-		trigger_spell(spell)
-		self.cooldown = COOLDOWN_TIME
+	plant.shoot()
 
-func _physics_process(delta):
-	if self.cooldown > 0:
-		self.cooldown -= delta
+func stop_shooting():
+	var plant = self.player.get_current_plant()
+
+	if not plant:
+		return
+
+	plant.stop_shooting()
