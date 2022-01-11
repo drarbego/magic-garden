@@ -9,6 +9,8 @@ const ACTION_DISTANCE = 30
 var speed = 300
 var is_walking = false
 var dir = Vector2.ZERO
+var max_health = 50.0
+var health = max_health
 
 # make it a reference to the plant obj and only
 # make it null if is the same instance id
@@ -92,6 +94,7 @@ func _process(delta):
 		anim_dir = "right"
 
 	$AnimatedSprite.play(anim_name + "_" + anim_dir)
+	$HealthBar.value = (self.health / self.max_health) * $HealthBar.max_value
 
 func _unhandled_input(event):
 	if event.is_action_pressed("change_action"):
@@ -149,3 +152,6 @@ func get_plant_spell():
 		return null
 
 	return plant.get_spell()
+
+func receive_damage(damage):
+	self.health -= damage

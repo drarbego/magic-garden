@@ -4,6 +4,9 @@ extends KinematicBody2D
 class_name Enemy
 
 var current_state: Object = null
+var character: Object = null
+export var projectile: PackedScene = null
+export var damage := 0.0
 
 
 func _physics_process(delta):

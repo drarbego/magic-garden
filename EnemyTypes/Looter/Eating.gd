@@ -27,6 +27,7 @@ func physics_process(delta, enemy):
 
 func on_VisionArea_body_entered(body, enemy):
 	if body is Character:
+		enemy.character = body
 		enemy.current_state = enemy.get_node("States/Attacking")
 	if body is Plant:
 		enemy.plants_to_eat.append(body)

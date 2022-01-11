@@ -129,3 +129,15 @@ action_scene = ExtResource( 3 )
 
 [node name="PlantingActionCaller" parent="Actions" instance=ExtResource( 6 )]
 action_scene = ExtResource( 5 )
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+margin_left = -38.5165
+margin_top = -54.9764
+margin_right = 60.4835
+margin_bottom = -40.9764
+step = 1.0
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
