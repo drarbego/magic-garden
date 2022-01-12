@@ -6,7 +6,11 @@ func physics_process(delta, enemy):
 	cooldown -= delta
 	if cooldown <= 0:
 		var dir = (enemy.character.global_position - enemy.global_position).normalized()
-		var projectile = enemy.projectile.instance().init(enemy.global_position + 60*dir, dir)
+		var projectile = enemy.projectile.instance().init(
+			enemy.global_position + 60*dir,
+			dir,
+			enemy
+		)
 		enemy.character.world.add_child(projectile)
 		cooldown = 1.0
 

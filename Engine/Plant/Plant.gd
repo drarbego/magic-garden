@@ -124,6 +124,10 @@ func _process(delta):
 func _physics_process(delta):
 	if self.cooldown > 0:
 		self.cooldown -= delta
+	self.physics_process(delta)
+
+func physics_process(delta):
+	pass
 
 func update_water_animation():
 	if self.needs_water:

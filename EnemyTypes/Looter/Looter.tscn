@@ -9,13 +9,13 @@
 [ext_resource path="res://ProjectileTypes/FireBall.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 30.5989
+radius = 66.9891
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 43.5627
+radius = 85.5517
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 87.8206
+radius = 180.0
 
 [node name="Looter" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

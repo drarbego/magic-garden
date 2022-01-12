@@ -300,4 +300,3 @@ collision_mask = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
-autoplay = true

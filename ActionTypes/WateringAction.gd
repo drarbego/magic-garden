@@ -42,9 +42,9 @@ func _process(delta):
 
 func spawn_projectile():
 	var water_drop = WaterDrop.instance().init(
-		self.player,
 		$Icon.global_position,
-		(get_global_mouse_position() - self.global_position).normalized()
+		(get_global_mouse_position() - self.global_position).normalized(),
+		self.player
 	)
 	self.player.world.add_child(water_drop)
 

@@ -94,7 +94,6 @@ func _process(delta):
 		anim_dir = "right"
 
 	$AnimatedSprite.play(anim_name + "_" + anim_dir)
-	$HealthBar.value = (self.health / self.max_health) * $HealthBar.max_value
 
 func _unhandled_input(event):
 	if event.is_action_pressed("change_action"):
@@ -153,5 +152,16 @@ func get_plant_spell():
 
 	return plant.get_spell()
 
+func _on_HitBox_body_entered(body):
+	if not body is Projectile:
+		return
+
+	if body.instancer == self:
+		return
+
+	var received_damage = body.damage
+	self.receive_damage(received_damage)
+
 func receive_damage(damage):
 	self.health -= damage
+	$HealthBar.value = (self.health / self.max_health) * $HealthBar.max_value

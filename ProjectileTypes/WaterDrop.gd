@@ -13,13 +13,6 @@ var direction = Vector2.ZERO
 var speed = 50.0
 var initial_pos := Vector2.ZERO
 
-func init(_player: Object, pos: Vector2, dir: Vector2):
-	self.player = _player
-	self.global_position = pos
-	self.direction = dir
-
-	return self
-
 func _ready():
 	randomize()
 	var rand_extra_rotation = (randf() * 2 * MAX_EXTRA_RAND_ROTATION) - MAX_EXTRA_RAND_ROTATION

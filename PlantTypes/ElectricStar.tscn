@@ -17,5 +17,6 @@ spell = ExtResource( 6 )
 texture_stage_0 = ExtResource( 4 )
 texture_stage_1 = ExtResource( 1 )
 texture_stage_2 = ExtResource( 2 )
+COOLDOWN_TIME = 0.1
 energy_increase_per_sec = 1.0
-energy_cost = 1.0
+energy_cost = 0.5
