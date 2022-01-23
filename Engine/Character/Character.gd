@@ -165,3 +165,7 @@ func _on_HitBox_body_entered(body):
 func receive_damage(damage):
 	self.health -= damage
 	$HealthBar.value = (self.health / self.max_health) * $HealthBar.max_value
+
+func cure(health_increase):
+	self.health = clamp(health + health_increase, 0, self.max_health)
+	$HealthBar.value = (self.health / self.max_health) * $HealthBar.max_value

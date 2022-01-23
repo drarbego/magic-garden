@@ -2,7 +2,7 @@ extends Plant
 
 
 func shoot():
-	if self.cooldown <= 0 and self.has_enough_energy():
+	if self.is_cooled_down() and self.has_enough_energy():
 		self.decrease_energy()
 		var instance = self.spell.instance().init(
 			self.player.get_current_action().get_node("Icon").global_position,

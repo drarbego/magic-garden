@@ -144,8 +144,14 @@ func handle_impact(projectile):
 func has_enough_energy():
 	return self.energy >= self.energy_cost
 
-func decrease_energy():
-	self.energy -= self.energy_cost
+func is_cooled_down():
+	return self.cooldown <= 0
+
+func decrease_energy(custom_decrease=null):
+	if custom_decrease:
+		self.energy -= custom_decrease
+	else:
+		self.energy -= self.energy_cost
 
 func shoot():
 	pass
