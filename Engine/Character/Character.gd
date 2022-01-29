@@ -11,6 +11,7 @@ var is_walking = false
 var dir = Vector2.ZERO
 var max_health = 50.0
 var health = max_health
+var max_water = 10.0
 
 # make it a reference to the plant obj and only
 # make it null if is the same instance id

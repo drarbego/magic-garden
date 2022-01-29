@@ -14,4 +14,37 @@ shape = SubResource( 1 )
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color( 0.247059, 0.517647, 0.803922, 1 )
 polygon = PoolVector2Array( 50.0835, -0.383801, 42.5069, -27.3229, 20.0576, -45.5629, -7.4427, -48.369, -33.5399, -35.4607, -48.4126, -9.36349, -36.4582, 31.4549, -17.7705, 44.4696, -0.417542, 50.4764, 26.613, 40.4651, 38.9602, 28.7852 )
+
+[node name="Display" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="Display"]
+margin_left = -1.33484
+margin_top = -64.0723
+margin_right = 134.665
+margin_bottom = -50.0723
+step = 1.0
+page = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ActionButton" type="Button" parent="."]
+margin_left = -51.7296
+margin_top = -16.9131
+margin_right = 49.2704
+margin_bottom = 12.0869
+text = "action"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_WaterDispenser_body_entered"]
+[connection signal="toggled" from="ActionButton" to="." method="_on_ActionButton_toggled"]
