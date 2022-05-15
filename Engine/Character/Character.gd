@@ -6,12 +6,16 @@ class_name Character
 const CURRENT_ACTION_NAME = "CurrentAction"
 const ACTION_DISTANCE = 30
 
+onready var water_tween = $WaterTween
+
 var speed = 300
-var is_walking = false
+var is_walking := false
 var dir = Vector2.ZERO
 var max_health = 50.0
 var health = max_health
+
 var max_water = 10.0
+var water = 0.0
 
 # make it a reference to the plant obj and only
 # make it null if is the same instance id
@@ -76,6 +80,13 @@ class Inventory:
 			results.append(item.klass.instance().init(item.quantity))
 
 		return results
+
+func replenish_water(water_taken:float, duration: float):
+	self.water_tween.interpolate_property(self, "water", self.water, self.water + water_taken, duration)
+	self.water_tween.start()
+
+func stop_replenishing_water():
+	self.water_tween.remove_all()
 
 # should be used to configure the character after receiving the data from character creation
 func init():

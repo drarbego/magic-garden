@@ -13,10 +13,10 @@ const COOLDOWN_TIME := 0.1
 var cooldown := COOLDOWN_TIME
 
 func has_enough_projectiles():
-	return self.player.get_item_quantity(self.item_key) > 0
+	return self.player.water > 0
 
 func decrease_projectiles_by(quantity):
-	self.player.remove_item_from_inventory(self.item_key, quantity)
+	self.player.water -= quantity
 
 func _physics_process(delta):
 	self.cooldown -= delta
@@ -34,11 +34,7 @@ func _process(delta):
 	if not $Icon/ContentBar.visible:
 		return
 
-	var item = self.player.get_item(self.item_key)
-	if item:
-		$Icon/ContentBar.set_value($Icon/ContentBar.max_value * (item.quantity / item.max_quantity))
-	else:
-		$Icon/ContentBar.set_value(0)
+	$Icon/ContentBar.set_value($Icon/ContentBar.max_value * (self.player.water / self.player.max_water))
 
 func spawn_projectile():
 	var water_drop = WaterDrop.instance().init(

@@ -276,7 +276,6 @@ tile_data = PoolIntArray( 0, 10, 0, 1, 6, 0, 2, 6, 0, 3, 6, 0, 4, 6, 0, 5, 6, 0,
 
 [node name="WaterDispenser" parent="." instance=ExtResource( 3 )]
 position = Vector2( 396.903, 91.6577 )
-water_content = 20.0
 
 [node name="SeedDispenser" parent="." instance=ExtResource( 6 )]
 position = Vector2( 75.6807, 105.953 )

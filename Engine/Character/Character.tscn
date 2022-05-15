@@ -151,4 +151,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WaterTween" type="Tween" parent="."]
+
 [connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]

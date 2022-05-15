@@ -28,8 +28,6 @@ margin_left = -1.33484
 margin_top = -64.0723
 margin_right = 134.665
 margin_bottom = -50.0723
-step = 1.0
-page = 100.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -47,4 +45,6 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [connection signal="body_entered" from="." to="." method="_on_WaterDispenser_body_entered"]
-[connection signal="toggled" from="ActionButton" to="." method="_on_ActionButton_toggled"]
+[connection signal="body_exited" from="." to="." method="_on_WaterDispenser_body_exited"]
+[connection signal="button_down" from="ActionButton" to="." method="_on_ActionButton_button_down"]
+[connection signal="button_up" from="ActionButton" to="." method="_on_ActionButton_button_up"]
