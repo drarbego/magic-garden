@@ -42,10 +42,19 @@ func _unhandled_input(event):
 		self.current_plant = (self.current_plant + 1) % len(self.available_plants)
 		self.update_current_plant_texture()
 
+func _get_plant_position():
+	var tile_map = self.player.world.get_node("TileMap")
+	var tile_coords = tile_map.world_to_map(self.player.global_position)
+
+	return Vector2(
+		tile_coords.x * tile_map.cell_size.x + (tile_map.cell_size.x/2),
+		tile_coords.y * tile_map.cell_size.y + (tile_map.cell_size.y/2)
+	)
+
 func shoot():
 	if self.player.near_plants.empty() and self.has_enough_plants():
 		var plant = self.available_plants[self.current_plant].instance().init(self.player)
-		plant.global_position = self.player.global_position
+		plant.global_position = self._get_plant_position()
 		self.player.world.spawn_plant(plant)
 		self.decrease_current_plant_by(1)
 

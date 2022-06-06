@@ -94,6 +94,7 @@ func receive_water():
 func update_graphics():
 	if self.stage == 0:
 		$Sprite.set_texture(self.texture_stage_0)
+		$AnimationPlayer.play("sprout")
 	if self.stage == 1:
 		$Sprite.set_texture(self.texture_stage_1)
 	if self.stage == 2:
@@ -134,7 +135,6 @@ func update_water_animation():
 		var anim_speed =  0.5 / max(0.1, self.water_content / self.max_water_content)
 		$AnimationPlayer.play("water", -1, anim_speed)
 	else:
-		$AnimationPlayer.stop()
 		$WaterDrop.visible = false
 
 func handle_impact(projectile):
