@@ -4,8 +4,8 @@
 [ext_resource path="res://PlantTypes/FirePepper.gd" type="Script" id=2]
 [ext_resource path="res://ProjectileTypes/FireBall.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ItemTypes/FirePepperSeedItem.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/fire_pepper_100.png" type="Texture" id=5]
-[ext_resource path="res://Assets/fire_pepper_150.png" type="Texture" id=6]
+[ext_resource path="res://Assets/fire_plant/growing.png" type="Texture" id=5]
+[ext_resource path="res://Assets/fire_plant/producing.png" type="Texture" id=6]
 [ext_resource path="res://Assets/sprout/sprout_.png" type="Texture" id=7]
 
 [node name="FirePepper" instance=ExtResource( 1 )]
